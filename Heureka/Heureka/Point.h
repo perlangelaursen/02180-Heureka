@@ -15,6 +15,8 @@ public:
     Point(int x, int y) : x(x), y(y) { }
     double calcEuclideanDistance(Point p);
     double calcEuclideanDistance(int x, int y);
+    int getX() const;
+    int getY() const;
 private:
     int x;
     int y;
