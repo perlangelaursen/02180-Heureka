@@ -4,6 +4,6 @@ project(02180_Heureka)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES
-    Heureka/Heureka/main.cpp)
+    Heureka/Heureka/main.cpp Heureka/Heureka/Point.cpp Heureka/Heureka/Point.h)
 
 add_executable(02180_Heureka ${SOURCE_FILES})
