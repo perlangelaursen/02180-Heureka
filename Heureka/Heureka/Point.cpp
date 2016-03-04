@@ -5,11 +5,11 @@
 #include "Point.h"
 
 double Heureka::Point::calcEuclideanDistance(Heureka::Point p) {
-    return sqrt(pow(p.getX(), 2) + pow(p.getY(), 2));
+    return sqrt(pow(x-p.getX(), 2) + pow(y-p.getY(), 2));
 }
 
-double Heureka::Point::calcEuclideanDistance(int x, int y) {
-    return sqrt(pow(x, 2) + pow(y, 2));
+double Heureka::Point::calcEuclideanDistance(int pointx, int pointy) {
+    return sqrt(pow(x - pointx, 2) + pow(y - pointy, 2));
 }
 
 int Heureka::Point::getX() const {

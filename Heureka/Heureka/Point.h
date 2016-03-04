@@ -14,7 +14,7 @@ class Heureka::Point {
 public:
     Point(int x, int y) : x(x), y(y) { }
     double calcEuclideanDistance(Point p);
-    double calcEuclideanDistance(int x, int y);
+    double calcEuclideanDistance(int pointx, int pointy);
     int getX() const;
     int getY() const;
 private:
