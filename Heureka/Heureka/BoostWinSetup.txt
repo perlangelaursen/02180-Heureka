@@ -1,0 +1,9 @@
+Here is how I was able to use Boost:
+1.Download and extract the zip version of Boost libraries.
+2.Run bootstrap.bat file and then run bjam.exe.
+3.Wait for roughly 30 minutes or so.
+4.Create a new project in Visual Studio.
+5.Go to project-->properties-->Linker-->General-->Additional Library Directories and add boost/stage/lib directory to it.
+6.Go to project-->properties-->C/C++-->General-->Additional Include Directories and add boost directory to it.
+
+You will be able to build your project without any errors !
