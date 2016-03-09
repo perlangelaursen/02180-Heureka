@@ -28,12 +28,6 @@ int Pathfinding::pointExists(Heureka::Point point) {
 
 void Pathfinding::addState(int x1, int y1, std::string roadName, int x2, int y2) {
     Heureka::Point p1(x1, y1);
-    Heureka::Point p2(x2, y2);
-    Heureka::State temp;
-    temp.roadName = roadName;
-    temp.distance = p1.calcEuclideanDistance(p2);
-    temp.nextPoint = addPoint(x2, y2);
-    int state1 = addPoint(x1, y1);
     states.resize(states.size() + 1);
-    states[state1].push_back(temp);
+    states[addPoint(x1, y1)].push_back(Heureka::State{addPoint(x2, y2), p1.calcEuclideanDistance(x2, y2), roadName});
 }

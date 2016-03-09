@@ -5,8 +5,10 @@
 #ifndef INC_02180_HEUREKA_PATHFINDING_H
 #define INC_02180_HEUREKA_PATHFINDING_H
 
-
 #include <vector>
+#include <algorithm>
+#include <limits>
+#include <queue>
 #include "Point.h"
 #include "State.h"
 

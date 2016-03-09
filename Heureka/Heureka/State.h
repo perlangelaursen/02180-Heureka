@@ -14,6 +14,10 @@ namespace Heureka {
         int nextPoint;
         double distance;
         std::string roadName;
+
+        bool operator> (const State s) const {
+            return distance > s.distance;
+        }
     };
 }
 
