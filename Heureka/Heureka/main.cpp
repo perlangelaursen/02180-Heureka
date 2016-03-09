@@ -6,7 +6,8 @@
 int main(int argc,char *argv[]) {
 	std::vector<std::string> temp(5);
 	std::string tempString;
-	std::ifstream ifs(argv[1]);
+	std::string file = argv[1];
+	std::ifstream ifs(file);
 	std::istringstream istringstream(tempString);
 	int n=0;
 	if(!(ifs.is_open())) {
