@@ -12,6 +12,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Pathfinding.cpp" />
+    <ClCompile Include="Point.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Comparator.h" />
+    <ClInclude Include="Pathfinding.h" />
+    <ClInclude Include="Point.h" />
+    <ClInclude Include="State.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7FF8A6DA-B03E-48E9-BC52-49B2890B9BA0}</ProjectGuid>
