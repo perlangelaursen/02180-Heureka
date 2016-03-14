@@ -20,8 +20,11 @@ namespace Heureka {
 
 class Pathfinding {
 public:
-    void addState(int x1, int y1, std::string roadName, int x2, int y2);
-	void aStar(Heureka::Point start, Heureka::Point goal);
+    static void addState(int x1, int y1, std::string roadName, int x2, int y2);
+	static void aStar(Heureka::Point start, Heureka::Point goal);
+
+	Pathfinding() { }
+
 private:
 	std::priority_queue<Heureka::State, Comparator> priorityQueue; // List of all states
     std::vector<Heureka::Point> points;
