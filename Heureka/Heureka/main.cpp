@@ -1,44 +1,36 @@
 #include <iostream>
+#include <sstream>
 #include <fstream>
 #include <vector>
-#include <sstream>
-#include "Pathfinding.h"
+#include <boost/algorithm/string/split.hpp>
+#include <boost/algorithm/string/classification.hpp>
+#include <boost/lexical_cast.hpp>
 
-int main(int argc,char *argv[]) {
+using namespace std;
+
+int main() {
 	std::vector<std::string> temp(5);
 	std::string tempString;
-	std::string file = argv[1];
+	std::string file = "Copenhagen.txt";
 	std::ifstream ifs(file);
-	std::istringstream istringstream(tempString);
-	std::string::size_type sz;
 
-	int n=0;
-	int tempX1, tempY1, tempX2, tempY2;
+	int tempX1, tempX2, tempY1, tempY2;
+
 	if(!(ifs.is_open())) {
 		std::cerr <<  "Error! Could not open file";
 	}
 
 	while (std::getline(ifs, tempString)) {
-		for (std::istream_iterator<std::string> iterator = std::istream_iterator<std::string>(istringstream);
-			 iterator != std::istream_iterator<std::string>() && n < 5; ++iterator, ++n) {
-			temp[n] = *iterator;
-		}
-		tempX1 = std::stoi(temp[0], &sz);
-		tempY1 = std::stoi(temp[1], &sz);
-		tempX2 = std::stoi(temp[3], &sz);
-		tempY2 = std::stoi(temp[4], &sz);
-		//Pathfinding::addState(tempX1, tempY1, temp[2], tempX2, tempY2);
-		temp.clear();
-		temp.resize(5);
+		boost::split(temp, tempString, boost::is_any_of(" "));
+		tempX1 = boost::lexical_cast<int>(temp[0]);
+		tempY1 = boost::lexical_cast<int>(temp[1]);
+		tempX2 = boost::lexical_cast<int>(temp[3]);
+		tempY2 = boost::lexical_cast<int>(temp[4]);
+
+		std::cout << tempX1 << " " << tempY1 << " " << " " << temp[2] << " " << tempX2 << " " << tempY2 << std::endl;
 	}
 
-	//Heureka::Point point1(tempX1, tempY1);
-	//Heureka::Point point2(tempY1, tempY2);
-	//Pathfinding::aStar(point1, point2);
 
-
-	ifs.close();
-
-	std::cout << "Hello World\n";
-		return 0;
+	std::cout << "Hello, World!" << endl;
+	return 0;
 }
