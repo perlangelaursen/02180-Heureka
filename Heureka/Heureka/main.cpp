@@ -27,14 +27,14 @@ int main(int argc,char *argv[]) {
 		tempY1 = std::stoi(temp[1], &sz);
 		tempX2 = std::stoi(temp[3], &sz);
 		tempY2 = std::stoi(temp[4], &sz);
-		Pathfinding::addState(tempX1, tempY1, temp[2], tempX2, tempY2);
+		//Pathfinding::addState(tempX1, tempY1, temp[2], tempX2, tempY2);
 		temp.clear();
 		temp.resize(5);
 	}
 
-	Heureka::Point point1(tempX1, tempY1);
-	Heureka::Point point2(tempY1, tempY2);
-	Pathfinding::aStar(point1, point2);
+	//Heureka::Point point1(tempX1, tempY1);
+	//Heureka::Point point2(tempY1, tempY2);
+	//Pathfinding::aStar(point1, point2);
 
 
 	ifs.close();

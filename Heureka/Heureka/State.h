@@ -11,12 +11,14 @@
 
 namespace Heureka {
     struct State {
+        int index;
         int nextPoint;
         double distance;
+        double heuristic_distance;
         std::string roadName;
 
-        bool operator> (const State s) const {
-            return distance > s.distance;
+        bool operator()(const State& lhs, const State& rhs) const {
+            return lhs.heuristic_distance < rhs.heuristic_distance;
         }
     };
 }

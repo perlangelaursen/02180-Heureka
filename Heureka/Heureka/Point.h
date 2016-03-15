@@ -12,7 +12,7 @@ namespace Heureka {
 }
 class Heureka::Point {
 public:
-    Point(int x, int y) : x(x), y(y) { }
+    Point(int i, int i1) : x(i), y(i1) { }
     double calcEuclideanDistance(Point p);
     double calcEuclideanDistance(int pointx, int pointy);
     int getX() const;

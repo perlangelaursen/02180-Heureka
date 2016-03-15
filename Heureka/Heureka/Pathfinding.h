@@ -10,6 +10,7 @@
 #include <limits>
 #include <queue>
 #include <iostream>
+#include <list>
 #include "Point.h"
 #include "State.h"
 #include "Comparator.h"
@@ -20,15 +21,17 @@ namespace Heureka {
 
 class Pathfinding {
 public:
-    static void addState(int x1, int y1, std::string roadName, int x2, int y2);
-	static void aStar(Heureka::Point start, Heureka::Point goal);
+    void addState(int x1, int y1, std::string roadName, int x2, int y2);
+	void aStar(Heureka::State start, Heureka::State goal);
 
 	Pathfinding() { }
 
 private:
-	std::priority_queue<Heureka::State, Comparator> priorityQueue; // List of all states
+	std::list<Heureka::State> openSet;
+	//std::priority_queue<Heureka::State, Comparator> priorityQueue; // List of all states
     std::vector<Heureka::Point> points;
-    std::vector<std::vector<Heureka::State>> states; // List of neighbors
+	std::vector<Heureka::State> states;
+    std::vector<std::vector<Heureka::State>> graph; // List of neighbors
 	std::vector<double> distancesToStart; // Length of path from start to current node
 	std::vector<double> distancesToGoal; // Distance from current node to goal
 	std::vector<int> cameFrom;
@@ -39,7 +42,7 @@ private:
     int pointExists(Heureka::Point);
     int addPoint(int x, int y);
 	bool isVisited(int neighbor);
-	void Pathfinding::reconstructPath(int startIndex, int goalIndex);
+	void reconstructPath(int startIndex, int goalIndex);
 };
 
 
