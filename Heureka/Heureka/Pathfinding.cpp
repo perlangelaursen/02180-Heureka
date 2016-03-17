@@ -33,7 +33,7 @@ void Pathfinding::addState(int x1, int y1, std::string roadName, int x2, int y2)
 	Heureka::State temp;
 	temp.index = currIndex;
 	temp.nextPoint = addPoint(x2, y2);
-	temp.distance = p1.calcEuclideanDistance(x2, y2);
+	temp.distanceFromStart = p1.calcEuclideanDistance(x2, y2);
 	temp.heuristic_distance = 0;
 	temp.roadName = roadName;
     graph[currIndex].push_back(temp);
@@ -75,7 +75,7 @@ void Pathfinding::aStar(Heureka::State start, Heureka::State goal) {
 			if (isVisited(i.nextPoint)) {
 				continue; // Have been there before
 			}
-			double temporaryDistance = distancesToStart[currentPointIndex] + i.distance;
+			double temporaryDistance = distancesToStart[currentPointIndex] + i.distanceFromStart;
 			if(std::find(openSet.begin(), openSet.end(), i.nextPoint) != openSet.end()) {
 				i.heuristic_distance = temporaryDistance + points[i.nextPoint].calcEuclideanDistance(points[goalIndex]);
 				openSet.push_back(i);
@@ -122,7 +122,7 @@ void Pathfinding::aStar(Heureka::State start, Heureka::State goal) {
 			if (isVisited(i.nextPoint)) {
 				continue; // Have been there before
 			}
-			double temporaryDistance = distancesToStart[currentPointIndex] + i.distance;
+			double temporaryDistance = distancesToStart[currentPointIndex] + i.distanceFromStart;
 			if (temporaryDistance <= distancesToStart[i.nextPoint]) {
 				priorityQueue.push(points[i.nextPoint]);
 			}

@@ -10,6 +10,6 @@ set(SOURCE_FILES
         Heureka/Heureka/State.h
         Heureka/Heureka/Pathfinding.cpp
         Heureka/Heureka/Pathfinding.h
-        Heureka/Heureka/Comparator.h)
+        Heureka/Heureka/Comparator.h Heureka/Heureka/Driver.cpp Heureka/Heureka/Driver.h)
 
 add_executable(02180_Heureka ${SOURCE_FILES})

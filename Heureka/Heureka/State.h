@@ -8,17 +8,26 @@
 #include <string>
 #include "Point.h"
 
+typedef std::pair<int, std::string> neighbor;
 
 namespace Heureka {
     struct State {
-        int index;
-        int nextPoint;
-        double distance;
+        double distanceFromStart;
         double heuristic_distance;
-        std::string roadName;
+        double total_distance;
+        bool visited;
+        Point point;
+        std::vector<neighbor> neighbors;
 
         bool operator()(const State& lhs, const State& rhs) const {
             return lhs.heuristic_distance < rhs.heuristic_distance;
+        }
+
+        bool operator== (const State& lhs, const State& rhs) const {
+            return lhs.point == rhs.point &&
+                    lhs.distanceFromStart == rhs.distanceFromStart &&
+                    lhs.heuristic_distance == rhs.heuristic_distance &&
+                    lhs.total_distance == rhs.total_distance;
         }
     };
 }
