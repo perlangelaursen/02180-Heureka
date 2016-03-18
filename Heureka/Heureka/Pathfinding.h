@@ -29,19 +29,10 @@ public:
 
 private:
 	std::list<Heureka::State> openSet;
-	//std::priority_queue<Heureka::State, Comparator> priorityQueue; // List of all states
-    std::vector<Heureka::Point> points;
 	std::vector<Heureka::State> states;
-    std::vector<std::vector<Heureka::State>> graph; // List of neighbors
-	std::vector<double> distancesToStart; // Length of path from start to current node
-	std::vector<double> distancesToGoal; // Distance from current node to goal
-	std::vector<int> cameFrom;
-	std::vector<int> visited;
 
 	int getIndex(Heureka::State s);
-
 	void aStar(Heureka::State start, Heureka::State goal);
-
 	void reconstructPath(Heureka::State goal);
 	int checkIfStateExists(Heureka::State state);
 };
