@@ -16,6 +16,7 @@ namespace Heureka {
         double heuristic_distance;
         double total_distance;
         bool visited = false;
+        int cameFrom = -1;
         Point point;
         std::vector<neighbor> neighbors;
 
