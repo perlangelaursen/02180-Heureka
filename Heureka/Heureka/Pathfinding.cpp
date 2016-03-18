@@ -10,12 +10,14 @@ void Pathfinding::addState(int x1, int y1, std::string roadName, int x2, int y2)
     temp1.point = point1;
     temp1.distanceFromStart = std::numeric_limits<double>::max();
     temp1.heuristic_distance = std::numeric_limits<double>::max();
+    states.push_back(temp1);
 
     Heureka::Point point2(x2, y2);
     Heureka::State temp2;
     temp2.point = point2;
     temp2.distanceFromStart = std::numeric_limits<double>::max();
     temp2.heuristic_distance = std::numeric_limits<double>::max();
+    states.push_back(temp2);
 
     int index1 = checkIfStateExists(temp1);
     int index2 = checkIfStateExists(temp2);
