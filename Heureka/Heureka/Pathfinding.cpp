@@ -52,7 +52,9 @@ void Pathfinding::aStar(Heureka::State start, Heureka::State goal) {
             states[neighbor.first].cameFrom = getIndex(current);
             states[neighbor.first].distanceFromStart = tempDistanceFromStart;
             states[neighbor.first].heuristic_distance = states[neighbor.first].point.calcEuclideanDistance(goal.point);
-            iterator = std::find(openSet.begin(), openSet.end(), states[neighbor.first]);
+            iterator = std::find_if(openSet.begin(), openSet.end(), [](Heureka::State& state) {
+                return state.point == states[neighbor.first].point;
+            });
             if(iterator != openSet.end()) {
                 (*iterator).cameFrom = states[neighbor.first].cameFrom;
                 (*iterator).distanceFromStart = states[neighbor.first].distanceFromStart;
