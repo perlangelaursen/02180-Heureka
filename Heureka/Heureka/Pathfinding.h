@@ -22,7 +22,7 @@ namespace Heureka {
 class Pathfinding {
 public:
     void addState(int x1, int y1, std::string roadName, int x2, int y2);
-	void aStar(Heureka::State start, Heureka::State goal);
+	void aStar(int startIndex, int goalIndex);
 
 	Pathfinding() { }
 
@@ -40,9 +40,11 @@ private:
 	int getIndex(Heureka::Point p);
 
     int pointExists(Heureka::Point);
+	void aStar(Heureka::State start, Heureka::State goal);
     int addPoint(int x, int y);
 	bool isVisited(int neighbor);
 	void reconstructPath(int startIndex, int goalIndex);
+	int checkIfStateExists(Heureka::State state);
 };
 
 

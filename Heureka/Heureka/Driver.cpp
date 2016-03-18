@@ -21,6 +21,7 @@ void Driver::run() {
         tempY2 = boost::lexical_cast<int>(temp[4]);
 
         std::cout << tempX1 << " " << tempY1 << " " << " " << temp[2] << " " << tempX2 << " " << tempY2 << std::endl;
+        pathfinding.addState(tempX1, tempY1, temp[2], tempX2, tempY2);
     }
 }
 

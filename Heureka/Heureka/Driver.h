@@ -13,6 +13,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>
+#include "Pathfinding.h"
 
 namespace Heureka {
     class Driver;
@@ -27,6 +28,7 @@ private:
     std::string file = "Copenhagen.txt";
 
     int tempX1, tempX2, tempY1, tempY2;
+    Pathfinding pathfinding;
 };
 
 
