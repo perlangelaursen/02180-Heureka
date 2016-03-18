@@ -14,7 +14,6 @@ namespace Heureka {
     struct State {
         double distanceFromStart;
         double heuristic_distance;
-        double total_distance;
         bool visited = false;
         int cameFrom = -1;
         Point point;
@@ -40,16 +39,6 @@ namespace Heureka {
                    distanceFromStart == rhs.distanceFromStart &&
                    heuristic_distance == rhs.heuristic_distance &&
                    total_distance == rhs.total_distance;
-        }
-
-        void updateStartDistance(double distance) {
-            this->distanceFromStart + distance;
-            this->total_distance = this->distanceFromStart + heuristic_distance;
-        }
-
-        void updateHeuristicDistance(double distance) {
-            this->heuristic_distance + distance;
-            this->total_distance = this->distanceFromStart + heuristic_distance;
         }
     };
 }

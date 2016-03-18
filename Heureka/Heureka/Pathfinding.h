@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <limits>
 #include <queue>
+#include <functional>
 #include <iostream>
 #include <list>
 #include "Point.h"
@@ -37,13 +38,11 @@ private:
 	std::vector<int> cameFrom;
 	std::vector<int> visited;
 
-	int getIndex(Heureka::Point p);
+	int getIndex(Heureka::State s);
 
-    int pointExists(Heureka::Point);
 	void aStar(Heureka::State start, Heureka::State goal);
-    int addPoint(int x, int y);
-	bool isVisited(int neighbor);
-	void reconstructPath(int startIndex, int goalIndex);
+
+	void reconstructPath(Heureka::State goal);
 	int checkIfStateExists(Heureka::State state);
 };
 

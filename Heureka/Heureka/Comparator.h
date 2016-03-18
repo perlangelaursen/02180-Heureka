@@ -14,7 +14,7 @@ namespace Heureka {
 class Comparator {
 public:
     int operator() (const Heureka::State s1, const Heureka::State s2) {
-        return s1.distanceFromStart > s2.distanceFromStart;
+        return s1.heuristic_distance < s2.heuristic_distance;
     }
 };
 
