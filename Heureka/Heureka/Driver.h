@@ -23,7 +23,6 @@ class Driver {
 public:
     void run();
 private:
-    std::vector<std::string> temp(5);
     std::string tempString;
     std::string file = "Copenhagen.txt";
 

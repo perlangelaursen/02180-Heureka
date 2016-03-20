@@ -12,12 +12,16 @@ typedef std::pair<int, std::string> neighbor;
 
 namespace Heureka {
     struct State {
+        Point point;
         double distanceFromStart;
         double heuristic_distance;
         bool visited = false;
         int cameFrom = -1;
-        Point point;
         std::vector<neighbor> neighbors;
+
+
+        State(double distanceFromStart, double heuristic_distance, const Point point) : distanceFromStart(
+                distanceFromStart), heuristic_distance(heuristic_distance), point(point) { }
 
         bool operator()(const State& lhs, const State& rhs) const {
             return lhs.heuristic_distance < rhs.heuristic_distance;
@@ -27,18 +31,8 @@ namespace Heureka {
             return heuristic_distance < rhs.heuristic_distance;
         }
 
-        bool operator== (const State& lhs, const State& rhs) const {
-            return lhs.point == rhs.point &&
-                    lhs.distanceFromStart == rhs.distanceFromStart &&
-                    lhs.heuristic_distance == rhs.heuristic_distance &&
-                    lhs.total_distance == rhs.total_distance;
-        }
-
         bool operator== (const State& rhs) const {
-            return point == rhs.point &&
-                   distanceFromStart == rhs.distanceFromStart &&
-                   heuristic_distance == rhs.heuristic_distance &&
-                   total_distance == rhs.total_distance;
+            return point == rhs.point;
         }
     };
 }

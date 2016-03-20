@@ -20,8 +20,4 @@ int Heureka::Point::getY() const {
     return y;
 }
 
-bool Heureka::Point::operator==(Point &point) const {
-    return (this->x == point.x) && (this->y == point.y);
-}
-
 

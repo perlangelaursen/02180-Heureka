@@ -17,7 +17,10 @@ public:
     double calcEuclideanDistance(int pointx, int pointy);
     int getX() const;
     int getY() const;
-    bool operator==(Point& point) const;
+    bool operator==(const Point& point) const {
+        return (this->x == point.x) && (this->y == point.y);
+    }
+
 private:
     int x;
     int y;
