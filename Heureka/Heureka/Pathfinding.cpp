@@ -21,24 +21,26 @@ void Pathfinding::addState(int x1, int y1, std::string roadName, int x2, int y2)
 void Pathfinding::aStar(Heureka::State start, Heureka::State goal) {
     start.distanceFromStart = 0;
     start.heuristic_distance = start.point.calcEuclideanDistance(goal.point);
-    openSet.push_back(start);
+    start.updateTotalDistance();
+    queue.push_back(start);
     double tempDistanceFromStart;
-    std::list<Heureka::State>::iterator iterator;
+    std::deque<Heureka::State>::iterator iterator;
 
-    while (!openSet.empty()) {
-        openSet.sort();
-        Heureka::State current = openSet.front();
+    while (!queue.empty()) {
+        std::sort(queue.begin(), queue.end());
+        Heureka::State current = queue.front();
         if (current == goal) {
             reconstructPath(goal);
-            openSet.clear();
+            queue.clear();
             break;
         }
-        openSet.pop_front();
+        queue.pop_front();
         for(std::pair<int, std::string> neighbor : current.neighbors) {
             int index = neighbor.first;
             if (states[index].visited) {
                 continue;
             }
+            states[index].visited = true;
             tempDistanceFromStart = current.distanceFromStart +
                     current.point.calcEuclideanDistance(states[index].point);
             if (tempDistanceFromStart >= states[index].distanceFromStart) {
@@ -48,14 +50,14 @@ void Pathfinding::aStar(Heureka::State start, Heureka::State goal) {
             states[index].distanceFromStart = tempDistanceFromStart;
             states[index].heuristic_distance = states[index].point.calcEuclideanDistance(goal.point);
             states[index].updateTotalDistance();
-            iterator = std::find(openSet.begin(), openSet.end(), states[index]);
-            if(iterator != openSet.end()) {
+            iterator = std::find(queue.begin(), queue.end(), states[index]);
+            if(iterator != queue.end()) {
                 (*iterator).cameFrom = states[index].cameFrom;
                 (*iterator).distanceFromStart = states[index].distanceFromStart;
                 (*iterator).heuristic_distance = states[index].heuristic_distance;
                 (*iterator).updateTotalDistance();
             } else {
-                openSet.push_front(states[index]);
+                queue.push_front(states[index]);
             }
         }
     }
@@ -70,7 +72,7 @@ void Pathfinding::reconstructPath(Heureka::State goal) {
                                 [goal](const std::pair<int, std::string>& element) {
                                     return element.first == goal.cameFrom;
                                 });
-        currentIndex = (*iterator).first;
+        currentIndex = goal.cameFrom;
         path.insert(path.begin(), (*iterator).second);
     }
     std::copy(path.begin(), path.end(), std::ostream_iterator<std::string>(std::cout, "\n"));

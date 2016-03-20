@@ -8,10 +8,9 @@
 #include <vector>
 #include <algorithm>
 #include <limits>
-#include <queue>
 #include <functional>
 #include <iostream>
-#include <list>
+#include <deque>
 #include "Point.h"
 #include "State.h"
 #include "Comparator.h"
@@ -28,7 +27,7 @@ public:
 	Pathfinding() { }
 
 private:
-	std::list<Heureka::State> openSet;
+	std::deque<Heureka::State> queue;
 	std::vector<Heureka::State> states;
 
 	int getIndex(Heureka::State s);

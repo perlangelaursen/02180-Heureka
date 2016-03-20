@@ -9,7 +9,6 @@
 #include <fstream>
 #include <vector>
 #include <iostream>
-#include <sstream>
 #include <boost/lexical_cast.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>
