@@ -15,20 +15,27 @@ namespace Heureka {
         Point point;
         double distanceFromStart;
         double heuristic_distance;
+        double totalDistance;
         bool visited = false;
         int cameFrom = -1;
         std::vector<neighbor> neighbors;
 
 
         State(double distanceFromStart, double heuristic_distance, const Point point) : distanceFromStart(
-                distanceFromStart), heuristic_distance(heuristic_distance), point(point) { }
+                distanceFromStart), heuristic_distance(heuristic_distance), point(point) {
+            updateTotalDistance();
+        }
+
+        void updateTotalDistance() {
+            totalDistance = distanceFromStart + heuristic_distance;
+        }
 
         bool operator()(const State& lhs, const State& rhs) const {
-            return lhs.heuristic_distance < rhs.heuristic_distance;
+            return lhs.totalDistance < rhs.totalDistance;
         }
 
         bool operator< (const State& rhs) const {
-            return heuristic_distance < rhs.heuristic_distance;
+            return totalDistance < rhs.totalDistance;
         }
 
         bool operator== (const State& rhs) const {

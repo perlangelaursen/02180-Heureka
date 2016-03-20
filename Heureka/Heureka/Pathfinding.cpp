@@ -47,11 +47,13 @@ void Pathfinding::aStar(Heureka::State start, Heureka::State goal) {
             states[index].cameFrom = getIndex(current);
             states[index].distanceFromStart = tempDistanceFromStart;
             states[index].heuristic_distance = states[index].point.calcEuclideanDistance(goal.point);
+            states[index].updateTotalDistance();
             iterator = std::find(openSet.begin(), openSet.end(), states[index]);
             if(iterator != openSet.end()) {
                 (*iterator).cameFrom = states[index].cameFrom;
                 (*iterator).distanceFromStart = states[index].distanceFromStart;
                 (*iterator).heuristic_distance = states[index].heuristic_distance;
+                (*iterator).updateTotalDistance();
             } else {
                 openSet.push_front(states[index]);
             }
