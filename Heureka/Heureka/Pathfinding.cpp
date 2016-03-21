@@ -40,7 +40,6 @@ void Pathfinding::aStar(Heureka::State start, Heureka::State goal) {
             if (states[index].visited) {
                 continue;
             }
-            states[index].visited = true;
             tempDistanceFromStart = current.distanceFromStart +
                     current.point.calcEuclideanDistance(states[index].point);
             if (tempDistanceFromStart >= states[index].distanceFromStart) {
@@ -50,6 +49,7 @@ void Pathfinding::aStar(Heureka::State start, Heureka::State goal) {
             states[index].distanceFromStart = tempDistanceFromStart;
             states[index].heuristic_distance = states[index].point.calcEuclideanDistance(goal.point);
             states[index].updateTotalDistance();
+            states[index].visited = true;
             iterator = std::find(queue.begin(), queue.end(), states[index]);
             if(iterator != queue.end()) {
                 (*iterator).cameFrom = states[index].cameFrom;
@@ -66,13 +66,15 @@ void Pathfinding::aStar(Heureka::State start, Heureka::State goal) {
 void Pathfinding::reconstructPath(Heureka::State goal) {
     std::vector<std::string> path;
     int currentIndex = getIndex(goal);
+    int previousIndex;
     std::vector<std::pair<int, std::string>>::iterator iterator;
     while (currentIndex != -1) {
-        iterator = std::find_if(goal.neighbors.begin(), goal.neighbors.end(),
-                                [goal](const std::pair<int, std::string>& element) {
-                                    return element.first == goal.cameFrom;
+        previousIndex = states[currentIndex].cameFrom;
+        iterator = std::find_if(states[previousIndex].neighbors.begin(), states[previousIndex].neighbors.end(),
+                                [currentIndex](const std::pair<int, std::string>& element) {
+                                    return element.first == currentIndex;
                                 });
-        currentIndex = goal.cameFrom;
+        currentIndex = previousIndex;
         path.insert(path.begin(), (*iterator).second);
     }
     std::copy(path.begin(), path.end(), std::ostream_iterator<std::string>(std::cout, "\n"));
