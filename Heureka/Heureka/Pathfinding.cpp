@@ -64,7 +64,7 @@ void Pathfinding::aStar(Heureka::State start, Heureka::State goal) {
 }
 
 void Pathfinding::reconstructPath(Heureka::State goal) {
-    std::vector<std::string> path;
+    std::deque<std::string> path;
     int currentIndex = getIndex(goal);
     int previousIndex;
     std::vector<std::pair<int, std::string>>::iterator iterator;
@@ -75,7 +75,7 @@ void Pathfinding::reconstructPath(Heureka::State goal) {
                                     return element.first == currentIndex;
                                 });
         currentIndex = previousIndex;
-        path.insert(path.begin(), (*iterator).second);
+        path.push_front((*iterator).second);
     }
     std::copy(path.begin(), path.end(), std::ostream_iterator<std::string>(std::cout, "\n"));
 }
