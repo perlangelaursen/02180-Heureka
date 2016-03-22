@@ -28,7 +28,7 @@ void Pathfinding::aStar(int start, int goal) {
         std::sort(queue.begin(), queue.end());
         int currentIndex = getIndex(queue.front());
         if (currentIndex == goal) {
-            reconstructPath(goal);
+            reconstructPath(start, goal);
             queue.clear();
             break;
         }
@@ -66,17 +66,18 @@ void Pathfinding::updateState(const Heureka::State &goal, double tempDistanceFro
     states[index].updateTotalDistance();
 }
 
-void Pathfinding::reconstructPath(int goal) {
+void Pathfinding::reconstructPath(int start, int goal) {
     std::deque<std::string> path;
     int currentIndex = goal;
     int previousIndex;
     std::vector<std::pair<int, std::string>>::iterator iterator;
-    while (currentIndex != -1) {
+    while (currentIndex != start) {
         previousIndex = states[currentIndex].cameFrom;
         iterator = std::find_if(states[previousIndex].neighbors.begin(), states[previousIndex].neighbors.end(),
-                                [currentIndex](const std::pair<int, std::string>& element) {
+                                [currentIndex](const std::pair<int, std::string> element) {
                                     return element.first == currentIndex;
                                 });
+
         currentIndex = previousIndex;
         path.push_front((*iterator).second);
     }

@@ -20,10 +20,20 @@ void Driver::run() {
         tempX2 = boost::lexical_cast<int>(temp[3]);
         tempY2 = boost::lexical_cast<int>(temp[4]);
 
-        std::cout << tempX1 << " " << tempY1 << " " << " " << temp[2] << " " << tempX2 << " " << tempY2 << std::endl;
         pathfinding.addState(tempX1, tempY1, temp[2], tempX2, tempY2);
     }
     ifs.close();
-    pathfinding.aStar(12, 3);
+
+    std::ifstream ifs2(directions);
+    if(!(ifs2.is_open())) {
+        std::cerr <<  "Error! Could not open file";
+    }
+    std::getline(ifs2, tempString);
+    boost::split(temp, tempString, boost::is_any_of(" "));
+    int start = boost::lexical_cast<int>(temp[0]);
+    int goal = boost::lexical_cast<int>(temp[1]);
+
+    pathfinding.aStar(start, goal);
+    ifs2.close();
 }
 

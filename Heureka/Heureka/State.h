@@ -6,6 +6,7 @@
 #define INC_02180_HEUREKA_STATE_H
 
 #include <string>
+#include <vector>
 #include "Point.h"
 
 typedef std::pair<int, std::string> neighbor;
@@ -20,11 +21,18 @@ namespace Heureka {
         int cameFrom = -1;
         std::vector<neighbor> neighbors;
 
-
         State(double distanceFromStart, double heuristic_distance, const Point point) : distanceFromStart(
                 distanceFromStart), heuristic_distance(heuristic_distance), point(point) {
             updateTotalDistance();
         }
+
+        State(const State& other) : distanceFromStart(other.distanceFromStart),
+                                    heuristic_distance(other.heuristic_distance),
+                                    point(other.point), visited(other.visited),
+                                    cameFrom(other.cameFrom), neighbors(other.neighbors){
+            updateTotalDistance();
+        }
+
 
         void updateTotalDistance() {
             totalDistance = distanceFromStart + heuristic_distance;

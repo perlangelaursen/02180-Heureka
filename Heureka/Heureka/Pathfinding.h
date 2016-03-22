@@ -31,7 +31,7 @@ private:
 	std::vector<Heureka::State> states;
 
 	int getIndex(Heureka::State& state);
-	void reconstructPath(int goal);
+	void reconstructPath(int start, int goal);
 	int checkIfStateExists(Heureka::State state);
 
 	void updateState(const Heureka::State &goal, double tempDistanceFromStart, int current, int index);
