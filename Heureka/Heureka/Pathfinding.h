@@ -30,10 +30,12 @@ private:
 	std::deque<Heureka::State> queue;
 	std::vector<Heureka::State> states;
 
-	int getIndex(Heureka::State s);
-	void aStar(Heureka::State start, Heureka::State goal);
-	void reconstructPath(Heureka::State goal);
+	int getIndex(Heureka::State& state);
+	void aStar(Heureka::State& start, Heureka::State& goal);
+	void reconstructPath(Heureka::State& goal);
 	int checkIfStateExists(Heureka::State state);
+
+	void updateState(const Heureka::State &goal, double tempDistanceFromStart, Heureka::State &current, int index);
 };
 
 
