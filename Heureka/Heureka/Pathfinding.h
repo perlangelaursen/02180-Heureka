@@ -31,11 +31,10 @@ private:
 	std::vector<Heureka::State> states;
 
 	int getIndex(Heureka::State& state);
-	void aStar(Heureka::State& start, Heureka::State& goal);
-	void reconstructPath(Heureka::State& goal);
+	void reconstructPath(int goal);
 	int checkIfStateExists(Heureka::State state);
 
-	void updateState(const Heureka::State &goal, double tempDistanceFromStart, Heureka::State &current, int index);
+	void updateState(const Heureka::State &goal, double tempDistanceFromStart, int current, int index);
 };
 
 
