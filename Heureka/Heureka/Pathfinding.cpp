@@ -79,18 +79,13 @@ void Pathfinding::reconstructPath(Heureka::State goal) {
 }
 
 int Pathfinding::checkIfStateExists(Heureka::State state) {
-    bool inSet = false;
     int i = 0;
     for(auto& s : states) {
-        if(state == s) {
-            inSet = true;
-        }
+        if (s == state) return i;
+        ++i;
     }
-    if(!inSet) {
-        states.push_back(state);
-        i = (int) (states.size() - 1);
-    }
-    return i;
+    states.push_back(state);
+    return (int) states.size();
 }
 
 void Pathfinding::aStar(int startIndex, int goalIndex) {
