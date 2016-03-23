@@ -34,7 +34,7 @@ void Pathfinding::aStar(int start, int goal) {
         }
         queue.pop_front();
         states[currentIndex].visited = true;
-        for(std::pair<int, std::string> neighbor : states[currentIndex].neighbors) {
+        for(auto neighbor : states[currentIndex].neighbors) {
             int index = neighbor.first;
             if (states[index].visited) {
                 continue;
@@ -79,25 +79,25 @@ void Pathfinding::reconstructPath(int start, int goal) {
                                 });
 
         currentIndex = previousIndex;
-        path.push_front((*iterator).second);
+        path.push_front(iterator -> second);
     }
     std::copy(path.begin(), path.end(), std::ostream_iterator<std::string>(std::cout, "\n"));
 }
 
 int Pathfinding::checkIfStateExists(Heureka::State state) {
-    std::vector<Heureka::State>::iterator iterator = std::find(states.begin(), states.end(), state);
+    auto iterator = std::find(states.begin(), states.end(), state);
     if(iterator == states.end()) {
         states.push_back(state);
-        return (int) states.size() - 1;
+        return boost::lexical_cast<int>(states.size()-1);
     } else {
-        return (int) std::distance(states.begin(), iterator);
+        return boost::lexical_cast<int>(std::distance(states.begin(), iterator));
     }
 }
 
 int Pathfinding::getIndex(Heureka::State& state) {
-    std::vector<Heureka::State>::iterator iterator = std::find(states.begin(), states.end(), state);
+    auto iterator = std::find(states.begin(), states.end(), state);
     if(iterator != states.end()) {
-        return (int) std::distance(states.begin(), iterator);
+        return boost::lexical_cast<int>(std::distance(states.begin(), iterator));
     }
     return -1;
 }

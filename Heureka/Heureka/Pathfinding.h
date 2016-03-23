@@ -11,6 +11,7 @@
 #include <functional>
 #include <iostream>
 #include <deque>
+#include <boost/lexical_cast.hpp>
 #include "Point.h"
 #include "State.h"
 #include "Comparator.h"
@@ -23,7 +24,6 @@ class Pathfinding {
 public:
     void addState(int x1, int y1, std::string roadName, int x2, int y2);
 	void aStar(int startIndex, int goalIndex);
-
 	Pathfinding() { }
 
 private:
@@ -33,7 +33,6 @@ private:
 	int getIndex(Heureka::State& state);
 	void reconstructPath(int start, int goal);
 	int checkIfStateExists(Heureka::State state);
-
 	void updateState(const Heureka::State &goal, double tempDistanceFromStart, int current, int index);
 };
 
