@@ -81,7 +81,9 @@ void Pathfinding::reconstructPath(int start, int goal) {
         currentIndex = previousIndex;
         path.push_front(iterator -> second);
     }
-    std::copy(path.begin(), path.end(), std::ostream_iterator<std::string>(std::cout, "\n"));
+    for(auto s : path) {
+        std::cout << s << "\n";
+    }
 }
 
 int Pathfinding::checkIfStateExists(Heureka::State state) {
