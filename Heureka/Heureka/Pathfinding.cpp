@@ -104,6 +104,16 @@ int Pathfinding::getIndex(Heureka::State& state) {
     return -1;
 }
 
+int Pathfinding::getIndex(int x, int y) {
+    Heureka::Point temp(x, y);
+    auto iterator = std::find_if(states.begin(), states.end(), [temp](const Heureka::State& state) {
+        return state.point == temp;
+    });
+    return boost::lexical_cast<int>(std::distance(states.begin(), iterator));
+}
+
+
+
 
 
 

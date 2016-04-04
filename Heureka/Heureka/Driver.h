@@ -25,9 +25,12 @@ private:
     std::string tempString;
     std::string file = "test.txt";
     std::string directions = "testDirections.txt";
-
     int tempX1, tempX2, tempY1, tempY2;
     Pathfinding pathfinding;
+
+    void readStateSpace();
+    void readDirections();
+    int getIndex(std::vector<std::string> &temp, std::ifstream &ifs);
 };
 
 

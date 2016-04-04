@@ -24,6 +24,7 @@ class Pathfinding {
 public:
     void addState(int x1, int y1, std::string roadName, int x2, int y2);
 	void aStar(int startIndex, int goalIndex);
+	int getIndex(int x, int y);
 	Pathfinding() { }
 
 private:
