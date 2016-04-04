@@ -111,11 +111,3 @@ int Pathfinding::getIndex(int x, int y) {
     });
     return boost::lexical_cast<int>(std::distance(states.begin(), iterator));
 }
-
-
-
-
-
-
-
-
