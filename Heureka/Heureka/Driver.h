@@ -23,8 +23,8 @@ public:
     void run();
 private:
     std::string tempString;
-    std::string file = "test.txt";
-    std::string directions = "testDirections.txt";
+    std::string file = "Copenhagen.txt";
+    std::string directions = "CopenhagenDirections.txt";
     int tempX1, tempX2, tempY1, tempY2;
     Pathfinding pathfinding;
 
