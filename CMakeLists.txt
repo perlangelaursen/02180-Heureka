@@ -20,7 +20,7 @@ set(SOURCE_FILES
         Heureka/Heureka/KnowledgeBase.cpp
         Heureka/Heureka/KnowledgeBase.h
         Heureka/Heureka/InferenceReader.cpp
-        Heureka/Heureka/InferenceReader.h Heureka/Heureka/Node.h)
+        Heureka/Heureka/InferenceReader.h Heureka/Heureka/Node.h Heureka/Heureka/INode.h)
 
 FIND_PACKAGE(Boost)
 IF (Boost_FOUND)

@@ -18,6 +18,7 @@ public:
     int cameFrom = -1;
 
 
+
     Node(double heuristic_distance, double distanceFromStart) : heuristic_distance(heuristic_distance),
                                                                 distanceFromStart(distanceFromStart) {
         updateTotalDistance();
@@ -28,12 +29,9 @@ public:
         updateTotalDistance();
     }
 
-    virtual void updateTotalDistance() {
+    void updateTotalDistance() {
         totalDistance = distanceFromStart + heuristic_distance;
     }
-    virtual bool operator()(const Node& lhs, const Node& rhs) const = 0;
-    virtual bool operator< (const Node& rhs) const = 0;
-    virtual bool operator== (const Node& rhs) const = 0;
 };
 
 
