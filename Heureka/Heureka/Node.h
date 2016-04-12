@@ -5,11 +5,13 @@
 #ifndef INC_02180_HEUREKA_NODE_H
 #define INC_02180_HEUREKA_NODE_H
 
+#include "INode.h"
+
 namespace Heureka {
     class Node;
 }
 
-class Node {
+class Node : public INode {
 public:
     double distanceFromStart;
     double heuristic_distance;
@@ -32,6 +34,24 @@ public:
     void updateTotalDistance() {
         totalDistance = distanceFromStart + heuristic_distance;
     }
+
+    virtual double estimateHeuristicDistance(INode otherNode) override {
+        return 0;
+    }
+
+    virtual bool operator()(const INode &lhs, const INode &rhs) override {
+        return false;
+    }
+
+    virtual bool operator<(const INode &rhs) override {
+        return false;
+    }
+
+    virtual bool operator==(const INode &rhs) override {
+        return false;
+    }
+
+
 };
 
 

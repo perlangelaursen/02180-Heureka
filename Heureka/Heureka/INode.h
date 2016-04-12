@@ -8,6 +8,10 @@
 
 #include <ostream>
 
+namespace Heureka {
+    class INode;
+}
+
 class INode {
 public:
     virtual ~INode()  = default;
