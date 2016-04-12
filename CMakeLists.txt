@@ -8,6 +8,7 @@ set(SOURCE_FILES
         Heureka/Heureka/Point.cpp
         Heureka/Heureka/Point.h
         Heureka/Heureka/State.h
+        Heureka/Heureka/State.cpp
         Heureka/Heureka/Pathfinding.cpp
         Heureka/Heureka/Pathfinding.h
         Heureka/Heureka/Comparator.h
@@ -19,7 +20,7 @@ set(SOURCE_FILES
         Heureka/Heureka/KnowledgeBase.cpp
         Heureka/Heureka/KnowledgeBase.h
         Heureka/Heureka/InferenceReader.cpp
-        Heureka/Heureka/InferenceReader.h)
+        Heureka/Heureka/InferenceReader.h Heureka/Heureka/Node.h)
 
 FIND_PACKAGE(Boost)
 IF (Boost_FOUND)

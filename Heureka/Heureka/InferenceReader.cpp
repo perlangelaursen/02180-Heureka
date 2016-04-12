@@ -14,7 +14,7 @@ void InferenceReader::run() {
 }
 
 void InferenceReader::readKB() {
-    std::vector temp(100);
+    std::vector<std::string> temp(100);
     std::string tempString;
     std::ifstream ifs(KB);
 
@@ -30,7 +30,7 @@ void InferenceReader::readKB() {
 }
 
 void InferenceReader::readEntailed() {
-    std::vector temp(100);
+    std::vector<std::string> temp(100);
     std::string tempString;
     std::ifstream ifs(KB);
 
