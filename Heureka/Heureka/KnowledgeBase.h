@@ -5,6 +5,9 @@
 #ifndef INC_02180_HEUREKA_KNOWLEDGEBASE_H
 #define INC_02180_HEUREKA_KNOWLEDGEBASE_H
 
+namespace Heureka {
+    class KnowledgeBase;
+}
 
 class KnowledgeBase {
 
