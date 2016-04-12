@@ -12,7 +12,14 @@ set(SOURCE_FILES
         Heureka/Heureka/Pathfinding.h
         Heureka/Heureka/Comparator.h
         Heureka/Heureka/Driver.cpp
-        Heureka/Heureka/Driver.h)
+        Heureka/Heureka/Driver.h
+        Heureka/Heureka/Literal.h
+        Heureka/Heureka/Clause.cpp
+        Heureka/Heureka/Clause.h
+        Heureka/Heureka/KnowledgeBase.cpp
+        Heureka/Heureka/KnowledgeBase.h
+        Heureka/Heureka/InferenceReader.cpp
+        Heureka/Heureka/InferenceReader.h)
 
 FIND_PACKAGE(Boost)
 IF (Boost_FOUND)
