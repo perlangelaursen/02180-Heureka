@@ -21,7 +21,7 @@ struct Literal {
     }
 
     bool operator== (const Literal& rhs) {
-        return negated == rhs.negated && symbol == rhs.symbol;
+        return negated == rhs.negated && symbol.compare(rhs.symbol);
     }
 
     std::string toString() const {
@@ -30,6 +30,7 @@ struct Literal {
 
     friend std::ostream& operator<< (std::ostream& os, const Literal& literal) {
         os << literal.toString();
+        return os;
     }
 };
 
