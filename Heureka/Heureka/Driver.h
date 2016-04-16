@@ -5,7 +5,6 @@
 #ifndef INC_02180_HEUREKA_DRIVER_H
 #define INC_02180_HEUREKA_DRIVER_H
 
-
 #include <fstream>
 #include <vector>
 #include <iostream>

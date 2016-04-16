@@ -5,9 +5,9 @@
 #ifndef INC_02180_HEUREKA_CLAUSE_H
 #define INC_02180_HEUREKA_CLAUSE_H
 
-#include <unordered_set>
 #include <vector>
 #include <deque>
+#include <boost/lexical_cast.hpp>
 #include "Literal.h"
 
 namespace Heureka {
@@ -26,17 +26,30 @@ public:
     double totalDistance;
     bool visited = false;
 
-
-    Clause(const std::vector<Clause> &localKnowledgeBase) : localKnowledgeBase(localKnowledgeBase) { }
-
     Clause(const std::vector<Clause> &localKnowledgeBase, double distanceFromStart, double heuristic_distance)
             : localKnowledgeBase(localKnowledgeBase), distanceFromStart(distanceFromStart),
               heuristic_distance(heuristic_distance) {
+        updateTotalDistance();
+        addToChildKnowledgeBase(localKnowledgeBase);
+    }
+
+
+    Clause(const std::vector<Clause> &localKnowledgeBase) : localKnowledgeBase(localKnowledgeBase) {
+        addToChildKnowledgeBase(localKnowledgeBase);
+    }
+
+    Clause(const Clause& other) : symbols(other.symbols), localKnowledgeBase(other.localKnowledgeBase),
+                                  childKnowledgeBase(other.childKnowledgeBase),
+                                  distanceFromStart(other.distanceFromStart),
+                                  heuristic_distance(other.heuristic_distance), visited(other.visited) {
         updateTotalDistance();
     }
 
     void addToChildKnowledgeBase(const std::vector<Clause> &local);
     void updateTotalDistance();
+    void addLiteralToClause(Literal& literal);
+    void calcHeuristicDistance();
+
 };
 
 
