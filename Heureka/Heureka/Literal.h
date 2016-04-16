@@ -8,20 +8,37 @@
 #include <string>
 
 namespace Heureka {
-    struct Literal {
-        bool negated = false;
-        std::string symbol;
+    struct Literal;
+}
 
-        Literal(const std::string &symbol) {
-            this -> negated = symbol.substr(0, 1) == '!';
-            this -> symbol = negated ? symbol.substr(1,symbol.size()-1) : symbol;
+struct Literal {
+    bool negated = false;
+    std::string symbol;
+
+    Literal(const std::string &symbol) {
+        this -> negated = symbol.compare(0,1,"!") == 0;
+        this -> symbol = negated ? symbol.substr(1,symbol.size()-1) : symbol;
+    }
+
+    bool operator== (const Literal& rhs) {
+        return negated == rhs.negated && symbol == rhs.symbol;
+    }
+
+    std::string toString() const {
+        return negated ? "!" + symbol : symbol;
+    }
+
+    friend std::ostream& operator<< (std::ostream& os, const Literal& literal) {
+        os << literal.toString();
+    }
+};
+
+namespace std {
+    template <> struct hash<Literal> {
+        size_t operator() (const Literal& literal) const {
+            return hash<std::string>()(literal.toString());
         }
     };
-
-    friend std::ostream operator<<(std::ostream& os, const Literal& literal) {
-        std::string out = literal.negated ? "!" + literal.symbol : literal.symbol;
-        os << out;
-    }
 }
 
 #endif //INC_02180_HEUREKA_LITERAL_H
