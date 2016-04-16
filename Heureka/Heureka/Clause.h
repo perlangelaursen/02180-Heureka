@@ -7,6 +7,7 @@
 
 #include <unordered_set>
 #include <vector>
+#include <deque>
 #include "Literal.h"
 
 namespace Heureka {
@@ -15,7 +16,7 @@ namespace Heureka {
 
 class Clause {
 private:
-    std::unordered_set<Literal> symbols;
+    std::deque<Literal> symbols;
     std::vector<Clause> resolutedClauses;
     std::vector<Clause> localKnowledgeBase;
     std::vector<Clause> childKnowledgeBase;
@@ -24,6 +25,18 @@ public:
     double heuristic_distance;
     double totalDistance;
     bool visited = false;
+
+
+    Clause(const std::vector<Clause> &localKnowledgeBase) : localKnowledgeBase(localKnowledgeBase) { }
+
+    Clause(const std::vector<Clause> &localKnowledgeBase, double distanceFromStart, double heuristic_distance)
+            : localKnowledgeBase(localKnowledgeBase), distanceFromStart(distanceFromStart),
+              heuristic_distance(heuristic_distance) {
+        updateTotalDistance();
+    }
+
+    void addToChildKnowledgeBase(const std::vector<Clause> &local);
+    void updateTotalDistance();
 };
 
 

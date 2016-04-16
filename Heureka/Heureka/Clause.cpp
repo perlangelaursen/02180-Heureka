@@ -3,3 +3,14 @@
 //
 
 #include "Clause.h"
+
+void Clause::updateTotalDistance() {
+    totalDistance = distanceFromStart + heuristic_distance;
+}
+
+void Clause::addToChildKnowledgeBase(const std::vector<Clause> &local) {
+
+}
+
+
+

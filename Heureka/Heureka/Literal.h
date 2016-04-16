@@ -20,6 +20,10 @@ struct Literal {
         this -> symbol = negated ? symbol.substr(1,symbol.size()-1) : symbol;
     }
 
+    bool operator() (const Literal& lhs, const Literal& rhs) {
+        return lhs.negated == rhs.negated && lhs.symbol.compare(rhs.symbol);
+    }
+
     bool operator== (const Literal& rhs) {
         return negated == rhs.negated && symbol.compare(rhs.symbol);
     }
