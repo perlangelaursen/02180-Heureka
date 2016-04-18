@@ -79,3 +79,9 @@ void KnowledgeBase::reconstructPath(Clause start, Clause goal) {
 		std::cout << s << "\n";
 	}
 }
+
+void KnowledgeBase::addClause(Clause &clause) {
+	clauses.push_back(clause);
+}
+
+

@@ -6,6 +6,11 @@
 #define INC_02180_HEUREKA_INFERENCEREADER_H
 
 #include <string>
+#include <limits>
+#include <vector>
+#include <fstream>
+#include <iostream>
+#include <boost/tokenizer.hpp>
 #include "KnowledgeBase.h"
 
 namespace Heureka {
@@ -17,8 +22,8 @@ public:
     void run();
 
 private:
-    std::string KB;
-    std::string entailed;
+    std::string KB = "KnowledgeBase.txt";
+    std::string entailed = "Entailed.txt";
     KnowledgeBase knowledgeBase;
 
     void readKB();

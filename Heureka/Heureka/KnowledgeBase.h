@@ -22,7 +22,10 @@ private :
 
 public:
 	void aStar(Clause start, Clause goal);
-
+	void addClause(Clause &clause);
+	const std::vector<Clause> &getClauses() const {
+		return clauses;
+	}
 };
 
 #endif //INC_02180_HEUREKA_KNOWLEDGEBASE_H
