@@ -27,6 +27,7 @@ public:
     double heuristic_distance;
     double totalDistance;
     bool visited = false;
+	Clause* cameFrom;
 
     Clause(const std::vector<Clause> &localKnowledgeBase, double distanceFromStart, double heuristic_distance)
             : localKnowledgeBase(localKnowledgeBase), distanceFromStart(distanceFromStart),

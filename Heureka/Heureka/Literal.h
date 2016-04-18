@@ -40,11 +40,6 @@ struct Literal {
     }
 };
 
-Literal::Literal() {
-
-}
-
-
 namespace std {
     template <> struct hash<Literal> {
         size_t operator() (const Literal& literal) const {

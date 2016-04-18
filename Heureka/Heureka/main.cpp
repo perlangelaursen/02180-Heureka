@@ -4,8 +4,8 @@
 using namespace std;
 
 int main() {
-	Driver p;
-	p.run();
+	Driver driver;
+	driver.run();
 
 	return 0;
 }
