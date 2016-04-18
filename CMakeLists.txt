@@ -18,8 +18,8 @@ set(SOURCE_FILES
         Heureka/Heureka/Clause.h
         Heureka/Heureka/KnowledgeBase.cpp
         Heureka/Heureka/KnowledgeBase.h
-        Heureka/Heureka/InferenceReader.cpp
-        Heureka/Heureka/InferenceReader.h)
+        Heureka/Heureka/InferenceDriver.cpp
+        Heureka/Heureka/InferenceDriver.h)
 
 FIND_PACKAGE(Boost)
 IF (Boost_FOUND)

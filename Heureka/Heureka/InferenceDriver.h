@@ -14,7 +14,7 @@
 #include "KnowledgeBase.h"
 
 namespace Heureka {
-    class InferenceReader;
+    class InferenceDriver;
 }
 
 class InferenceReader {
