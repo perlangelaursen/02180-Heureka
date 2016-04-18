@@ -49,7 +49,7 @@ public:
     void updateTotalDistance();
     void addLiteralToClause(Literal& literal);
     void calcHeuristicDistance();
-
+    std::string toString();
 };
 
 

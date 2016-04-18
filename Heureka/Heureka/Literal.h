@@ -12,6 +12,8 @@ namespace Heureka {
 }
 
 struct Literal {
+    Literal();
+
     bool negated = false;
     std::string symbol;
 
@@ -37,6 +39,11 @@ struct Literal {
         return os;
     }
 };
+
+Literal::Literal() {
+
+}
+
 
 namespace std {
     template <> struct hash<Literal> {

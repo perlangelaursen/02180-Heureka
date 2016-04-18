@@ -24,6 +24,19 @@ void Clause::calcHeuristicDistance() {
     heuristic_distance = boost::lexical_cast<double>(symbols.size());
 }
 
+std::string Clause::toString() {
+    std::string out("");
+    for(auto literal : symbols) {
+        out += literal.toString();
+        out += " || ";
+    }
+    out = (out.compare("") == 0) ? "Ø" : out.substr(0, out.length() - 4);
+    if (symbols.size() > 1) out = "(" + out +")";
+    return out;
+}
+
+
+
 
 
 
