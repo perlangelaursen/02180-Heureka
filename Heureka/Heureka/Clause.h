@@ -48,6 +48,11 @@ public:
         updateTotalDistance();
     }
 
+
+    ~Clause() {
+        delete cameFrom;
+    }
+
     void addToChildKnowledgeBase(const std::vector<Clause> &local);
     void updateTotalDistance();
     void addLiteralToClause(Literal& literal);
