@@ -14,7 +14,7 @@
 #include "Pathfinding.h"
 
 namespace Heureka {
-    class Driver;
+    class PathfindingDriver;
 }
 
 class Driver {

@@ -3,7 +3,7 @@
 //
 
 
-#include "Driver.h"
+#include "PathfindingDriver.h"
 
 void Driver::run() {
     readStateSpace();
