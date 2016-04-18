@@ -50,6 +50,13 @@ public:
     void addLiteralToClause(Literal& literal);
     void calcHeuristicDistance();
     std::string toString();
+
+
+
+    // Comparison operators
+    bool operator() (const Clause& lhs, const Clause& rhs);
+    bool operator< (const Clause& rhs);
+    bool operator== (const Clause& rhs);
 };
 
 

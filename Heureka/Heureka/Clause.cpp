@@ -35,6 +35,24 @@ std::string Clause::toString() {
     return out;
 }
 
+bool Clause::operator()(const Clause &lhs, const Clause &rhs) {
+    return lhs.totalDistance < rhs.totalDistance;
+}
+
+bool Clause::operator<(const Clause &rhs) {
+    return totalDistance < rhs.totalDistance;
+}
+
+bool Clause::operator==(const Clause &rhs) {
+    return symbols.size() == rhs.symbols.size() && symbols == rhs.symbols;
+}
+
+
+
+
+
+
+
 
 
 
