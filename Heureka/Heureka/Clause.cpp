@@ -47,6 +47,10 @@ bool Clause::operator==(const Clause &rhs) {
     return symbols.size() == rhs.symbols.size() && symbols == rhs.symbols;
 }
 
+bool Clause::operator!=(const Clause &rhs) {
+    return symbols != rhs.symbols;
+}
+
 Clause Clause::clausalResolution(Clause &clause) {
     std::deque<Literal> allSymbols;
     std::deque<Literal> resolutedSymbols;
@@ -86,23 +90,14 @@ Clause::Clause() {
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+std::vector<Clause> &Clause::getResolutedClauses() {
+    resolutedClauses.clear();
+    Clause empty;
+    for(Clause clause : childKnowledgeBase) {
+        Clause resultClause = clausalResolution(clause);
+        if(resultClause != empty) {
+            resolutedClauses.push_back(resultClause);
+        }
+    }
+    return resolutedClauses;
+}

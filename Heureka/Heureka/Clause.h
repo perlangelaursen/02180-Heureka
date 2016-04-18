@@ -53,16 +53,17 @@ public:
     void calcHeuristicDistance();
     std::string toString() const;
 
+    std::vector<Clause> &getResolutedClauses();
     Clause clausalResolution(Clause &clause);
     void addLiterals(std::deque<Literal> &to, std::deque<Literal> &symbols);
+    void eliminateDuplicates(std::deque<Literal, std::allocator<Literal>> &allSymbols,
+                             std::deque<Literal, std::allocator<Literal>> &resolutedSymbols) const;
 
     // Comparison operators
     bool operator() (const Clause& lhs, const Clause& rhs);
     bool operator< (const Clause& rhs);
     bool operator== (const Clause& rhs);
-
-    void eliminateDuplicates(std::deque<Literal, std::allocator<Literal>> &allSymbols,
-                             std::deque<Literal, std::allocator<Literal>> &resolutedSymbols) const;
+    bool operator!= (const Clause& rhs);
 };
 
 

@@ -8,7 +8,6 @@ set(SOURCE_FILES
         Heureka/Heureka/Point.cpp
         Heureka/Heureka/Point.h
         Heureka/Heureka/State.h
-        Heureka/Heureka/State.cpp
         Heureka/Heureka/Pathfinding.cpp
         Heureka/Heureka/Pathfinding.h
         Heureka/Heureka/Comparator.h
