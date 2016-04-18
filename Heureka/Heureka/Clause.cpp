@@ -77,7 +77,7 @@ void Clause::eliminateDuplicates(std::deque<Literal> &allSymbols, std::deque<Lit
     for(Literal l : allSymbols) {
         Literal inverse(l.toString());
         inverse.negated = !inverse.negated;
-        if(find(allSymbols.begin(), allSymbols.end(), inverse) == allSymbols.end())
+        if(std::find(allSymbols.begin(), allSymbols.end(), inverse) == allSymbols.end())
             resolutedSymbols.push_back(l);
     }
 }
