@@ -21,7 +21,7 @@ void KnowledgeBase::aStar(Clause start, Clause goal) {
 		Clause current = queue.front();
 
 		if (current == goal) {
-			//reconstructPath(start, goal);
+			reconstructPath(start, goal);
 			queue.clear();
 			break;
 		}
