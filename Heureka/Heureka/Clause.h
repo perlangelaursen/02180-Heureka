@@ -37,6 +37,11 @@ public:
     }
 
 
+    Clause(double distanceFromStart, double heuristic_distance) : distanceFromStart(distanceFromStart),
+                                                                  heuristic_distance(heuristic_distance) {
+        updateTotalDistance();
+    }
+
     Clause(const std::vector<Clause> &localKnowledgeBase) : localKnowledgeBase(localKnowledgeBase) {
         addToChildKnowledgeBase(localKnowledgeBase);
     }
