@@ -16,8 +16,6 @@ namespace Heureka {
 
 class Clause {
 private:
-    Clause();
-
     std::deque<Literal> symbols;
     std::vector<Clause> resolutedClauses;
     std::vector<Clause> localKnowledgeBase;
@@ -28,6 +26,8 @@ public:
     double totalDistance;
     bool visited = false;
 	Clause* cameFrom;
+
+    Clause();
 
     Clause(const std::vector<Clause> &localKnowledgeBase, double distanceFromStart, double heuristic_distance)
             : localKnowledgeBase(localKnowledgeBase), distanceFromStart(distanceFromStart),
