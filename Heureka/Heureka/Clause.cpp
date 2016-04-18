@@ -51,6 +51,11 @@ bool Clause::operator!=(const Clause &rhs) {
     return symbols != rhs.symbols;
 }
 
+std::ostream &operator<<(std::ostream &os, const Clause &clause) {
+    os << clause.toString();
+    return os;
+}
+
 Clause Clause::clausalResolution(Clause &clause) {
     std::deque<Literal> allSymbols;
     std::deque<Literal> resolutedSymbols;

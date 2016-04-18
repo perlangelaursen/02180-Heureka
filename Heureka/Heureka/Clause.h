@@ -64,6 +64,7 @@ public:
     bool operator< (const Clause& rhs);
     bool operator== (const Clause& rhs);
     bool operator!= (const Clause& rhs);
+    friend std::ostream& operator<< (std::ostream& os, const Clause& clause);
 };
 
 
