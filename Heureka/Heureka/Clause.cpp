@@ -24,7 +24,7 @@ void Clause::calcHeuristicDistance() {
     heuristic_distance = boost::lexical_cast<double>(symbols.size());
 }
 
-std::string Clause::toString() {
+std::string Clause::toString() const {
     std::string out("");
     for(auto literal : symbols) {
         out += literal.toString();
@@ -46,6 +46,51 @@ bool Clause::operator<(const Clause &rhs) {
 bool Clause::operator==(const Clause &rhs) {
     return symbols.size() == rhs.symbols.size() && symbols == rhs.symbols;
 }
+
+Clause Clause::clausalResolution(Clause &clause) {
+    std::deque<Literal> allSymbols;
+    std::deque<Literal> resolutedSymbols;
+    addLiterals(allSymbols, this->symbols);
+    addLiterals(allSymbols, clause.symbols);
+
+    eliminateDuplicates(allSymbols, resolutedSymbols);
+
+    Clause result(this->childKnowledgeBase);
+    for(Clause c : childKnowledgeBase) {
+        if(result == c) return Clause();
+    }
+    result.symbols=resolutedSymbols;
+
+    return result;
+}
+
+void Clause::eliminateDuplicates(std::deque<Literal> &allSymbols, std::deque<Literal> &resolutedSymbols) const {
+    for(Literal l : allSymbols) {
+        Literal inverse(l.toString());
+        inverse.negated = !inverse.negated;
+        if(find(allSymbols.begin(), allSymbols.end(), inverse) == allSymbols.end())
+            resolutedSymbols.push_back(l);
+    }
+}
+
+
+void Clause::addLiterals(std::deque<Literal> &to,
+                         std::deque<Literal> &symbols) {
+    std::deque<Literal>::const_iterator iterator;
+    for(iterator = symbols.begin(); iterator != symbols.end(); ++iterator) {
+        to.push_back(*iterator);
+    }
+}
+
+Clause::Clause() {
+
+}
+
+
+
+
+
+
 
 
 

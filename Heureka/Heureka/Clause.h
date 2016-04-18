@@ -16,6 +16,8 @@ namespace Heureka {
 
 class Clause {
 private:
+    Clause();
+
     std::deque<Literal> symbols;
     std::vector<Clause> resolutedClauses;
     std::vector<Clause> localKnowledgeBase;
@@ -49,14 +51,18 @@ public:
     void updateTotalDistance();
     void addLiteralToClause(Literal& literal);
     void calcHeuristicDistance();
-    std::string toString();
+    std::string toString() const;
 
-
+    Clause clausalResolution(Clause &clause);
+    void addLiterals(std::deque<Literal> &to, std::deque<Literal> &symbols);
 
     // Comparison operators
     bool operator() (const Clause& lhs, const Clause& rhs);
     bool operator< (const Clause& rhs);
     bool operator== (const Clause& rhs);
+
+    void eliminateDuplicates(std::deque<Literal, std::allocator<Literal>> &allSymbols,
+                             std::deque<Literal, std::allocator<Literal>> &resolutedSymbols) const;
 };
 
 
