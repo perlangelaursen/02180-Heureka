@@ -26,7 +26,7 @@ void Clause::calcHeuristicDistance() {
 
 std::string Clause::toString() const {
     std::string out("");
-    for(auto literal : symbols) {
+    for(auto& literal : symbols) {
         out += literal.toString();
         out += " || ";
     }
@@ -64,7 +64,7 @@ Clause Clause::clausalResolution(Clause &clause) {
 
     eliminateDuplicates(allSymbols, resolutedSymbols);
 
-    Clause result(this->childKnowledgeBase);
+    Clause result(this->childKnowledgeBase, std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
     for(Clause c : childKnowledgeBase) {
         if(result == c) return Clause();
     }
@@ -74,7 +74,7 @@ Clause Clause::clausalResolution(Clause &clause) {
 }
 
 void Clause::eliminateDuplicates(std::deque<Literal> &allSymbols, std::deque<Literal> &resolutedSymbols) const {
-    for(Literal l : allSymbols) {
+    for(Literal& l : allSymbols) {
         Literal inverse(l.toString());
         inverse.negated = !inverse.negated;
         if(std::find(allSymbols.begin(), allSymbols.end(), inverse) == allSymbols.end())

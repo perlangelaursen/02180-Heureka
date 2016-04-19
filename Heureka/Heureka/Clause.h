@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <deque>
+#include <limits>
 #include <boost/lexical_cast.hpp>
 #include "Literal.h"
 
@@ -40,10 +41,6 @@ public:
     Clause(double distanceFromStart, double heuristic_distance) : distanceFromStart(distanceFromStart),
                                                                   heuristic_distance(heuristic_distance) {
         updateTotalDistance();
-    }
-
-    Clause(const std::vector<Clause> &localKnowledgeBase) : localKnowledgeBase(localKnowledgeBase) {
-        addToChildKnowledgeBase(localKnowledgeBase);
     }
 
     Clause(const Clause& other) : symbols(other.symbols), localKnowledgeBase(other.localKnowledgeBase),
