@@ -52,11 +52,35 @@ bool Clause::operator<(const Clause &rhs) const {
 }
 
 bool Clause::operator==(const Clause &rhs) const {
-    return symbols.size() == rhs.symbols.size() && symbols == rhs.symbols;
+    if (symbols.size() > rhs.symbols.size()) {
+        return std::equal(symbols.begin(), symbols.end(), rhs.symbols.begin());
+    } else if (symbols.size() < rhs.symbols.size()) {
+        return std::equal(rhs.symbols.begin(), rhs.symbols.end(), symbols.begin());
+    } else {
+        symbols == rhs.symbols;
+    }
 }
 
 bool Clause::operator!=(const Clause &rhs) const {
-    return symbols != rhs.symbols;
+    if (symbols.size() > rhs.symbols.size()) {
+        return !(std::equal(symbols.begin(), symbols.end(), rhs.symbols.begin()));
+    } else if (symbols.size() < rhs.symbols.size()) {
+        return !(std::equal(rhs.symbols.begin(), rhs.symbols.end(), symbols.begin()));
+    } else {
+        return symbols != rhs.symbols;
+    }
+}
+
+void Clause::operator=(const Clause &rhs) {
+    symbols = rhs.symbols;
+    resolutedClauses = rhs.resolutedClauses;
+    localKnowledgeBase = rhs.localKnowledgeBase;
+    childKnowledgeBase = rhs.childKnowledgeBase;
+    distanceFromStart = rhs.distanceFromStart;
+    heuristic_distance = rhs.heuristic_distance;
+    totalDistance = rhs.totalDistance;
+    visited = rhs.visited;
+    cameFrom = rhs.cameFrom;
 }
 
 std::ostream &operator<<(std::ostream &os, const Clause &clause) {
