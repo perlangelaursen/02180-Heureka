@@ -27,7 +27,7 @@ private:
     KnowledgeBase knowledgeBase;
 
     void readKB();
-    void readEntailed();
+    Literal readEntailed();
     void runAStar();
 };
 

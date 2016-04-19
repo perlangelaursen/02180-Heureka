@@ -33,7 +33,7 @@ void InferenceDriver::readKB() {
 
 }
 
-void InferenceDriver::readEntailed() {
+Literal InferenceDriver::readEntailed() {
     std::string tempString;
     std::ifstream ifs(entailed);
 
@@ -42,12 +42,10 @@ void InferenceDriver::readEntailed() {
     }
 
     getline(ifs, tempString);
-    Clause clause(std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
     Literal literal(tempString);
     literal.negated = !literal.negated;
-    clause.addLiteralToClause(literal);
-    knowledgeBase.addClause(clause);
     ifs.close();
+    return literal;
 }
 
 void InferenceDriver::runAStar() {
@@ -56,7 +54,13 @@ void InferenceDriver::runAStar() {
     }
 
     Clause start(knowledgeBase.getClauses(), std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
+    Literal entailed = readEntailed();
+    start.addLiteralToClause(entailed);
+
     Clause empty(std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
+    Literal emptyLiteral("Ø");
+    empty.addLiteralToClause(emptyLiteral);
+
     knowledgeBase.aStar(start, empty);
 }
 

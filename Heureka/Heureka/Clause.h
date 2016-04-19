@@ -25,7 +25,7 @@ public:
 	Clause();
 	~Clause();
 
-	double distanceFromStart;
+    double distanceFromStart;
     double heuristic_distance;
     double totalDistance;
     bool visited = false;

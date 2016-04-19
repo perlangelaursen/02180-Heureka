@@ -8,6 +8,7 @@
 #include <vector>
 #include <iostream>
 #include "Clause.h"
+#include "Literal.h"
 
 namespace Heureka {
     class KnowledgeBase;
@@ -19,7 +20,6 @@ private :
 	void reconstructPath(Clause start, Clause goal);
 
 	std::vector<Clause> clauses;
-
 public:
 	void aStar(Clause start, Clause goal);
 	void addClause(Clause &clause);

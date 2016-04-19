@@ -74,7 +74,7 @@ Clause Clause::clausalResolution(Clause &clause) {
 
     Clause result(this->childKnowledgeBase, std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
     for(Clause c : childKnowledgeBase) {
-        if(result == c) return Clause();
+        if(result == c) return Clause(-1,-1);
     }
     result.symbols=resolutedSymbols;
 
@@ -101,8 +101,8 @@ void Clause::addLiterals(std::deque<Literal> &to,
 
 std::vector<Clause> &Clause::getResolutedClauses() {
     resolutedClauses.clear();
-    Clause empty;
-    for(Clause clause : childKnowledgeBase) {
+    Clause empty(-1, -1);
+    for(Clause clause : localKnowledgeBase) {
         Clause resultClause = clausalResolution(clause);
         if(resultClause != empty) {
             resolutedClauses.push_back(resultClause);
