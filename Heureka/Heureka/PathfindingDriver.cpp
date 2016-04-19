@@ -5,12 +5,12 @@
 
 #include "PathfindingDriver.h"
 
-void Driver::run() {
+void PathfindingDriver::run() {
     readStateSpace();
     readDirections();
 }
 
-void Driver::readDirections() {
+void PathfindingDriver::readDirections() {
     std::vector<std::string> temp(2);
     std::ifstream ifs(directions);
     if(!(ifs.is_open())) {
@@ -23,13 +23,13 @@ void Driver::readDirections() {
     ifs.close();
 }
 
-int Driver::getIndex(std::vector<std::string> &temp, std::ifstream &ifs) {
+int PathfindingDriver::getIndex(std::vector<std::string> &temp, std::ifstream &ifs) {
     getline(ifs, tempString);
     split(temp, tempString, boost::algorithm::is_any_of(" "));
     return pathfinding.getIndex(boost::lexical_cast<int>(temp[0]), boost::lexical_cast<int>(temp[1]));
 }
 
-void Driver::readStateSpace() {
+void PathfindingDriver::readStateSpace() {
     std::ifstream ifs(file);
     std::vector<std::string> temp(5);
 

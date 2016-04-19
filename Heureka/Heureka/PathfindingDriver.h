@@ -17,7 +17,7 @@ namespace Heureka {
     class PathfindingDriver;
 }
 
-class Driver {
+class PathfindingDriver {
 public:
     void run();
 private:
