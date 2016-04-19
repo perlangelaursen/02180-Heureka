@@ -4,6 +4,14 @@
 
 #include "Pathfinding.h"
 
+Pathfinding::Pathfinding() {
+
+}
+
+Pathfinding::~Pathfinding() {
+
+}
+
 void Pathfinding::addState(int x1, int y1, std::string roadName, int x2, int y2) {
     Heureka::Point point1(x1, y1);
     Heureka::State temp1(std::numeric_limits<double>::max(), std::numeric_limits<double>::max(), point1);

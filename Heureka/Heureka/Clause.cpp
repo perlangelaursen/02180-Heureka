@@ -4,6 +4,14 @@
 
 #include "Clause.h"
 
+Clause::Clause() {
+
+}
+
+Clause::~Clause() {
+	//delete cameFrom;
+}
+
 void Clause::updateTotalDistance() {
     totalDistance = distanceFromStart + heuristic_distance;
 }
@@ -89,10 +97,6 @@ void Clause::addLiterals(std::deque<Literal> &to,
     for(iterator = symbols.begin(); iterator != symbols.end(); ++iterator) {
         to.push_back(*iterator);
     }
-}
-
-Clause::Clause() {
-
 }
 
 std::vector<Clause> &Clause::getResolutedClauses() {

@@ -22,13 +22,14 @@ private:
     std::vector<Clause> localKnowledgeBase;
     std::vector<Clause> childKnowledgeBase;
 public:
-    double distanceFromStart;
+	Clause();
+	~Clause();
+
+	double distanceFromStart;
     double heuristic_distance;
     double totalDistance;
     bool visited = false;
 	Clause* cameFrom;
-
-    Clause();
 
     Clause(const std::vector<Clause> &localKnowledgeBase, double distanceFromStart, double heuristic_distance)
             : localKnowledgeBase(localKnowledgeBase), distanceFromStart(distanceFromStart),
@@ -48,11 +49,6 @@ public:
                                   distanceFromStart(other.distanceFromStart),
                                   heuristic_distance(other.heuristic_distance), visited(other.visited) {
         updateTotalDistance();
-    }
-
-
-    ~Clause() {
-        //delete cameFrom;
     }
 
     void addToChildKnowledgeBase(const std::vector<Clause> &local);
