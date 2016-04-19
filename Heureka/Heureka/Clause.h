@@ -30,6 +30,7 @@ public:
     double totalDistance;
     bool visited = false;
 	Clause* cameFrom;
+    static Clause came;
 
     Clause(const std::vector<Clause> &localKnowledgeBase, double distanceFromStart, double heuristic_distance)
             : localKnowledgeBase(localKnowledgeBase), distanceFromStart(distanceFromStart),

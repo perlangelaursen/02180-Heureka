@@ -57,7 +57,7 @@ bool Clause::operator==(const Clause &rhs) const {
     } else if (symbols.size() < rhs.symbols.size()) {
         return std::equal(rhs.symbols.begin(), rhs.symbols.end(), symbols.begin());
     } else {
-        symbols == rhs.symbols;
+        return symbols == rhs.symbols;
     }
 }
 
@@ -97,10 +97,11 @@ Clause Clause::clausalResolution(Clause &clause) {
     eliminateDuplicates(allSymbols, resolutedSymbols);
 
     Clause result(this->childKnowledgeBase, std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
+    result.symbols=resolutedSymbols;
     for(Clause c : childKnowledgeBase) {
         if(result == c) return Clause(-1,-1);
     }
-    result.symbols=resolutedSymbols;
+
 
     return result;
 }
