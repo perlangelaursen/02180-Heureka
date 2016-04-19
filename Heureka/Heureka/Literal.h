@@ -12,8 +12,6 @@ namespace Heureka {
 }
 
 struct Literal {
-    Literal();
-
     bool negated = false;
     std::string symbol;
 
@@ -22,17 +20,13 @@ struct Literal {
         this -> symbol = negated ? symbol.substr(1,symbol.size()-1) : symbol;
     }
 
-    bool operator() (const Literal& lhs, const Literal& rhs) const {
-        return lhs.negated == rhs.negated && lhs.symbol.compare(rhs.symbol) == 0;
-    }
+    Literal(const Literal& other) : negated(other.negated), symbol(other.symbol) { }
 
-    bool operator== (const Literal& rhs) const {
-        return negated == rhs.negated && symbol.compare(rhs.symbol) == 0;
-    }
+    bool operator() (const Literal& lhs, const Literal& rhs) const;
 
-    std::string toString() const {
-        return negated ? "!" + symbol : symbol;
-    }
+    bool operator== (const Literal& rhs) const;
+
+    std::string toString() const;
 
     friend std::ostream& operator<< (std::ostream& os, const Literal& literal) {
         os << literal.toString();
