@@ -44,12 +44,17 @@ void InferenceDriver::readEntailed() {
     getline(ifs, tempString);
     Clause clause(std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
     Literal literal(tempString);
+    literal.negated = !literal.negated;
     clause.addLiteralToClause(literal);
     knowledgeBase.addClause(clause);
     ifs.close();
 }
 
 void InferenceDriver::runAStar() {
+    for(auto c : knowledgeBase.getClauses()) {
+        std::cout << c << "\n";
+    }
+
     Clause start(knowledgeBase.getClauses(), std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
     Clause empty(std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
     knowledgeBase.aStar(start, empty);
