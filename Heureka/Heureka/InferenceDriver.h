@@ -17,7 +17,7 @@ namespace Heureka {
     class InferenceDriver;
 }
 
-class InferenceReader {
+class InferenceDriver {
 public:
     void run();
 

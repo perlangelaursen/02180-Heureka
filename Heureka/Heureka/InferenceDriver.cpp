@@ -5,13 +5,13 @@
 #include "InferenceDriver.h"
 
 
-void InferenceReader::run() {
+void InferenceDriver::run() {
     readKB();
     readEntailed();
     runAStar();
 }
 
-void InferenceReader::readKB() {
+void InferenceDriver::readKB() {
     std::string tempString;
     std::ifstream ifs(KB);
     boost::char_separator<char> separator(",");
@@ -33,7 +33,7 @@ void InferenceReader::readKB() {
 
 }
 
-void InferenceReader::readEntailed() {
+void InferenceDriver::readEntailed() {
     std::string tempString;
     std::ifstream ifs(entailed);
 
@@ -49,7 +49,7 @@ void InferenceReader::readEntailed() {
     ifs.close();
 }
 
-void InferenceReader::runAStar() {
+void InferenceDriver::runAStar() {
     Clause start(knowledgeBase.getClauses(), std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
     Clause empty(std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
     knowledgeBase.aStar(start, empty);
