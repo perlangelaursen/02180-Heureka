@@ -58,7 +58,7 @@ void KnowledgeBase::aStar(Clause start, Clause goal) {
 
 }
 
-void KnowledgeBase::updateClause(Clause &clause, double tempDistanceFromStart, Clause current) {
+void KnowledgeBase::updateClause(Clause &clause, double tempDistanceFromStart, Clause &current) {
 	clause.cameFrom = &current;
 	clause.distanceFromStart = tempDistanceFromStart;
 	clause.calcHeuristicDistance();

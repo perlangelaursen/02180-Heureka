@@ -14,6 +14,7 @@ set(SOURCE_FILES
         Heureka/Heureka/PathfindingDriver.cpp
         Heureka/Heureka/PathfindingDriver.h
         Heureka/Heureka/Literal.h
+        Heureka/Heureka/Literal.cpp
         Heureka/Heureka/Clause.cpp
         Heureka/Heureka/Clause.h
         Heureka/Heureka/KnowledgeBase.cpp

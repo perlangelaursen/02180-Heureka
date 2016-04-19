@@ -15,7 +15,7 @@ namespace Heureka {
 
 class KnowledgeBase {
 private :
-	void updateClause(Clause &clause, double tempDistanceFromStart, Clause current);
+	void updateClause(Clause &clause, double tempDistanceFromStart, Clause &current);
 	void reconstructPath(Clause start, Clause goal);
 
 	std::vector<Clause> clauses;
