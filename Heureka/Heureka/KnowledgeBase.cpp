@@ -73,6 +73,7 @@ void KnowledgeBase::reconstructPath(Clause start, Clause goal) {
 	while (current != start) {
 		previous = current.cameFrom;
 		path.push_front(previous->toString());
+		current = *previous;
 	}
 
 	for (auto s : path) {

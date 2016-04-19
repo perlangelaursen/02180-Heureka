@@ -52,7 +52,7 @@ public:
 
 
     ~Clause() {
-        delete cameFrom;
+        //delete cameFrom;
     }
 
     void addToChildKnowledgeBase(const std::vector<Clause> &local);
