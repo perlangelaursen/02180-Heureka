@@ -8,6 +8,7 @@
 void InferenceReader::run() {
     readKB();
     readEntailed();
+    runAStar();
 }
 
 void InferenceReader::readKB() {
@@ -47,6 +48,14 @@ void InferenceReader::readEntailed() {
     knowledgeBase.addClause(clause);
     ifs.close();
 }
+
+void InferenceReader::runAStar() {
+    Clause start(knowledgeBase.getClauses(), std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
+    Clause empty(std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
+    knowledgeBase.aStar(start, empty);
+}
+
+
 
 
 

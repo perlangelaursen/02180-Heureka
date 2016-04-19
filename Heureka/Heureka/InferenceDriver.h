@@ -28,6 +28,7 @@ private:
 
     void readKB();
     void readEntailed();
+    void runAStar();
 };
 
 
