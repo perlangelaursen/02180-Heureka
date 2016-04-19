@@ -25,7 +25,7 @@ void Clause::addToChildKnowledgeBase(const std::vector<Clause> &local) {
 }
 
 void Clause::addLiteralToClause(Literal &literal) {
-    symbols.push_front(literal);
+    symbols.push_back(literal);
 }
 
 void Clause::calcHeuristicDistance() {
