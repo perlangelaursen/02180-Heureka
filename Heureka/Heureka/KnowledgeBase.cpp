@@ -8,7 +8,7 @@ void KnowledgeBase::aStar(Clause start, Clause goal) {
 	std::deque<Clause> queue; // Open set, frontier, to be visited
 
 	start.distanceFromStart = 0;
-	//start.calcHeuristicDistance();
+	start.calcHeuristicDistance();
 	start.updateTotalDistance();
 	
 	queue.push_back(start);
@@ -20,7 +20,6 @@ void KnowledgeBase::aStar(Clause start, Clause goal) {
 		std::sort(queue.begin(), queue.end());
 		Clause current = queue.front();
 
-		std::cout << current << " == " << goal;
 		if (current == goal) {
 			reconstructPath(start, goal);
 			queue.clear();

@@ -34,7 +34,7 @@ void Clause::calcHeuristicDistance() {
 
 std::string Clause::toString() const {
     std::string out("");
-    for(auto& literal : symbols) {
+    for(const Literal& literal : symbols) {
         out += literal.toString();
         out += " || ";
     }
@@ -52,23 +52,21 @@ bool Clause::operator<(const Clause &rhs) const {
 }
 
 bool Clause::operator==(const Clause &rhs) const {
-    if (symbols.size() > rhs.symbols.size()) {
-        return std::equal(symbols.begin(), symbols.end(), rhs.symbols.begin());
-    } else if (symbols.size() < rhs.symbols.size()) {
-        return std::equal(rhs.symbols.begin(), rhs.symbols.end(), symbols.begin());
-    } else {
-        return symbols == rhs.symbols;
+    bool isEqual = (rhs.symbols.size() == symbols.size());
+    for(Literal symbol : rhs.symbols) {
+        if(std::find(symbols.begin(), symbols.end(), symbol) == symbols.end())
+            isEqual = false;
     }
+    return isEqual;
 }
 
 bool Clause::operator!=(const Clause &rhs) const {
-    if (symbols.size() > rhs.symbols.size()) {
-        return !(std::equal(symbols.begin(), symbols.end(), rhs.symbols.begin()));
-    } else if (symbols.size() < rhs.symbols.size()) {
-        return !(std::equal(rhs.symbols.begin(), rhs.symbols.end(), symbols.begin()));
-    } else {
-        return symbols != rhs.symbols;
+    bool isNotEqual = (rhs.symbols.size() != symbols.size());
+    for(Literal symbol : rhs.symbols) {
+        if(!(std::find(symbols.begin(), symbols.end(), symbol) == symbols.end()))
+            isNotEqual = false;
     }
+    return isNotEqual;
 }
 
 void Clause::operator=(const Clause &rhs) {
@@ -97,11 +95,10 @@ Clause Clause::clausalResolution(Clause &clause) {
     eliminateDuplicates(allSymbols, resolutedSymbols);
 
     Clause result(this->childKnowledgeBase, std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
-    result.symbols=resolutedSymbols;
     for(Clause c : childKnowledgeBase) {
         if(result == c) return Clause(-1,-1);
     }
-
+    result.symbols=resolutedSymbols;
 
     return result;
 }
