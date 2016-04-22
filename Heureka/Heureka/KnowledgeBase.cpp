@@ -35,7 +35,7 @@ void KnowledgeBase::aStar(Clause start, Clause goal) {
 				continue;
 			}
 
-			tempDistanceFromStart = current.distanceFromStart + 1;
+			tempDistanceFromStart = current.distanceFromStart + current.heuristic_distance;
 			iterator = std::find(queue.begin(), queue.end(), neighbor);
 
 			if (iterator == queue.end()) {

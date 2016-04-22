@@ -98,7 +98,10 @@ Clause Clause::clausalResolution(Clause &clause) {
     Clause result(childKnowledgeBase, std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
     for(Clause c : localKnowledgeBase) {
         if(result == c) {
-            return Clause(-1,-1);
+            Clause nullClause;
+            Literal literal("null");
+            nullClause.addLiteralToClause(literal);
+            return nullClause;
         }
     }
     result.symbols=resolutedSymbols;
@@ -126,10 +129,12 @@ void Clause::addLiterals(std::deque<Literal> &to,
 
 std::vector<Clause> &Clause::getResolutedClauses() {
     resolutedClauses.clear();
-    Clause empty(-1, -1);
+    Clause nullClause;
+    Literal literal("null");
+    nullClause.addLiteralToClause(literal);
     for(Clause clause : localKnowledgeBase) {
         Clause resultClause = clausalResolution(clause);
-        if(resultClause != empty) {
+        if(resultClause != nullClause) {
             resolutedClauses.push_back(resultClause);
         }
     }
