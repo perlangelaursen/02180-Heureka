@@ -63,6 +63,7 @@ public:
     void eliminateDuplicates(std::deque<Literal, std::allocator<Literal>> &allSymbols,
                              std::deque<Literal, std::allocator<Literal>> &resolutedSymbols) const;
 
+
     // Comparison operators
     bool operator() (const Clause& lhs, const Clause& rhs) const;
     bool operator< (const Clause& rhs) const;

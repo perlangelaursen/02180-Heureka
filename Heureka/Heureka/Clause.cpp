@@ -2,6 +2,7 @@
 // Created by Per Lange Laursen on 12/04/16.
 //
 
+#include <iostream>
 #include "Clause.h"
 
 Clause::Clause() {
@@ -95,8 +96,11 @@ Clause Clause::clausalResolution(Clause &clause) {
     eliminateDuplicates(allSymbols, resolutedSymbols);
 
     Clause result(this->childKnowledgeBase, std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
-    for(Clause c : childKnowledgeBase) {
-        if(result == c) return Clause(-1,-1);
+    for(Clause c : localKnowledgeBase) {
+        std::cout << result << " == " << c << "\n";
+        if(result == c) {
+            return Clause(-1,-1);
+        }
     }
     result.symbols=resolutedSymbols;
 

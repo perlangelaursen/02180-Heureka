@@ -49,10 +49,6 @@ Literal InferenceDriver::readEntailed() {
 }
 
 void InferenceDriver::runAStar() {
-    for(auto c : knowledgeBase.getClauses()) {
-        std::cout << c << "\n";
-    }
-
     Clause start(knowledgeBase.getClauses(), std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
     Literal entailed = readEntailed();
     start.addLiteralToClause(entailed);
