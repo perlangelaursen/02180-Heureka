@@ -29,7 +29,8 @@ void KnowledgeBase::aStar(Clause start, Clause goal) {
 		queue.pop_front();
 		current.visited = true;
 
-		for (auto neighbor : current.getResolutedClauses()) {
+		std::vector<Clause> neighbors = current.getResolutedClauses();
+		for (auto neighbor : neighbors) {
 			if (neighbor.visited) {
 				continue;
 			}

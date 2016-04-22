@@ -90,14 +90,13 @@ std::ostream &operator<<(std::ostream &os, const Clause &clause) {
 Clause Clause::clausalResolution(Clause &clause) {
     std::deque<Literal> allSymbols;
     std::deque<Literal> resolutedSymbols;
-    addLiterals(allSymbols, this->symbols);
+    addLiterals(allSymbols, symbols);
     addLiterals(allSymbols, clause.symbols);
 
     eliminateDuplicates(allSymbols, resolutedSymbols);
 
-    Clause result(this->childKnowledgeBase, std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
+    Clause result(childKnowledgeBase, std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
     for(Clause c : localKnowledgeBase) {
-        std::cout << result << " == " << c << "\n";
         if(result == c) {
             return Clause(-1,-1);
         }
