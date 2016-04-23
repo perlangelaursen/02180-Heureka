@@ -18,9 +18,10 @@ namespace Heureka {
 class Clause {
 private:
     std::deque<Literal> symbols;
-    std::vector<Clause> resolutedClauses;
-    std::vector<Clause> localKnowledgeBase;
-    std::vector<Clause> childKnowledgeBase;
+    std::vector<Clause*> resolutedClauses;
+    //std::vector<Clause> localKnowledgeBase;
+    //std::vector<Clause> childKnowledgeBase;
+
 public:
 	Clause();
 	~Clause();
@@ -31,12 +32,13 @@ public:
     bool visited = false;
 	Clause* cameFrom;
 
+    /*
     Clause(const std::vector<Clause> &localKnowledgeBase, double distanceFromStart, double heuristic_distance)
             : localKnowledgeBase(localKnowledgeBase), distanceFromStart(distanceFromStart),
               heuristic_distance(heuristic_distance) {
         updateTotalDistance();
         addToChildKnowledgeBase(localKnowledgeBase);
-    }
+    }*/
 
 
     Clause(double distanceFromStart, double heuristic_distance) : distanceFromStart(distanceFromStart),
@@ -44,24 +46,25 @@ public:
         updateTotalDistance();
     }
 
-    Clause(const Clause& other) : symbols(other.symbols), localKnowledgeBase(other.localKnowledgeBase),
-                                  childKnowledgeBase(other.childKnowledgeBase),
+    Clause(const Clause& other) : symbols(other.symbols),
                                   distanceFromStart(other.distanceFromStart),
-                                  heuristic_distance(other.heuristic_distance), visited(other.visited) {
+                                  heuristic_distance(other.heuristic_distance),
+                                  visited(other.visited) {
         updateTotalDistance();
     }
 
-    void addToChildKnowledgeBase(const std::vector<Clause> &local);
+    //void addToChildKnowledgeBase(const std::vector<Clause> &local);
     void updateTotalDistance();
     void addLiteralToClause(Literal& literal);
     void calcHeuristicDistance();
     std::string toString() const;
 
-    std::vector<Clause> &getResolutedClauses();
+    std::vector<Clause*> &getResolutedClauses();
+    /*
     Clause clausalResolution(Clause &clause);
     void addLiterals(std::deque<Literal> &to, std::deque<Literal> &symbols);
     void eliminateDuplicates(std::deque<Literal, std::allocator<Literal>> &allSymbols,
-                             std::deque<Literal, std::allocator<Literal>> &resolutedSymbols) const;
+                             std::deque<Literal, std::allocator<Literal>> &resolutedSymbols) const;*/
 
 
     // Comparison operators
@@ -70,7 +73,17 @@ public:
     bool operator== (const Clause& rhs) const;
     bool operator!= (const Clause& rhs) const;
     void operator= (const Clause& rhs);
+
+    void addNeighbor(Clause* neighbor);
+
     friend std::ostream& operator<< (std::ostream& os, const Clause& clause);
+    std::deque<Literal, std::allocator<Literal>> &getSymbols() {
+        return symbols;
+    }
+
+    void setSymbols(const std::deque<Literal, std::allocator<Literal>> &symbols) {
+        Clause::symbols = symbols;
+    }
 };
 
 
