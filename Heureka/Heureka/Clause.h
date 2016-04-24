@@ -18,7 +18,7 @@ namespace Heureka {
 class Clause {
 private:
     std::deque<Literal> symbols;
-    std::vector<Clause*> resolutedClauses;
+    std::vector<int> resolutedClauses;
 
 public:
 	Clause();
@@ -28,7 +28,7 @@ public:
     double heuristic_distance;
     double totalDistance;
     bool visited = false;
-	Clause* cameFrom;
+	int cameFrom;
 
     Clause(double distanceFromStart, double heuristic_distance) : distanceFromStart(distanceFromStart),
                                                                   heuristic_distance(heuristic_distance) {
@@ -47,7 +47,7 @@ public:
     void calcHeuristicDistance();
     std::string toString() const;
 
-    std::vector<Clause*> &getResolutedClauses();
+    std::vector<int> &getResolutedClauses();
 
     // Comparison operators
     bool operator() (const Clause& lhs, const Clause& rhs) const;
@@ -56,7 +56,7 @@ public:
     bool operator!= (const Clause& rhs) const;
     void operator= (const Clause& rhs);
 
-    void addNeighbor(Clause* neighbor);
+    void addNeighbor(int neighbor);
 
     friend std::ostream& operator<< (std::ostream& os, const Clause& clause);
     std::deque<Literal, std::allocator<Literal>> &getSymbols() {

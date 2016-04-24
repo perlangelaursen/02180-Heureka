@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <iostream>
+#include <boost/lexical_cast.hpp>
 #include "Clause.h"
 #include "Literal.h"
 
@@ -22,6 +23,7 @@ private :
 	void eliminateDuplicateLiterals(std::deque<Literal, std::allocator<Literal>> &allSymbols,
 									std::deque<Literal, std::allocator<Literal>> &resolutedSymbols);
 	void joinLiterals(std::deque<Literal> &to, std::deque<Literal> &symbols);
+	int getIndex(Clause& clause);
 
 	std::vector<Clause> clauses;
 public:
@@ -31,6 +33,7 @@ public:
 		return clauses;
 	}
 
+	void updateClause(int clause, double tempDistanceFromStart, int current);
 };
 
 #endif //INC_02180_HEUREKA_KNOWLEDGEBASE_H
