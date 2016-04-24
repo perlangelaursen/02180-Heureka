@@ -17,15 +17,6 @@ void Clause::updateTotalDistance() {
     totalDistance = distanceFromStart + heuristic_distance;
 }
 
-/*
-void Clause::addToChildKnowledgeBase(const std::vector<Clause> &local) {
-    std::vector<Clause>::const_iterator iterator;
-    for(iterator = local.begin(); iterator != local.end(); ++iterator) {
-        childKnowledgeBase.push_back(*iterator);
-    }
-    childKnowledgeBase.push_back(*this);
-}*/
-
 void Clause::addLiteralToClause(Literal &literal) {
     symbols.push_back(literal);
 }
@@ -74,8 +65,6 @@ bool Clause::operator!=(const Clause &rhs) const {
 void Clause::operator=(const Clause &rhs) {
     symbols = rhs.symbols;
     resolutedClauses = rhs.resolutedClauses;
-    //localKnowledgeBase = rhs.localKnowledgeBase;
-    //childKnowledgeBase = rhs.childKnowledgeBase;
     distanceFromStart = rhs.distanceFromStart;
     heuristic_distance = rhs.heuristic_distance;
     totalDistance = rhs.totalDistance;
@@ -87,49 +76,6 @@ std::ostream &operator<<(std::ostream &os, const Clause &clause) {
     os << clause.toString();
     return os;
 }
-
-/*
-Clause Clause::clausalResolution(Clause &clause) {
-    std::deque<Literal> allSymbols;
-    std::deque<Literal> resolutedSymbols;
-    addLiterals(allSymbols, symbols);
-    addLiterals(allSymbols, clause.symbols);
-
-    eliminateDuplicates(allSymbols, resolutedSymbols);
-
-    Clause result(childKnowledgeBase, std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
-    for(Clause c : localKnowledgeBase) {
-        std::cout << result << " == " << c << "\n";
-        if(result == c) {
-            Clause nullClause;
-            Literal literal("null");
-            nullClause.addLiteralToClause(literal);
-            return nullClause;
-        }
-    }
-    result.symbols=resolutedSymbols;
-
-    return result;
-}*/
-
-/*
-void Clause::eliminateDuplicates(std::deque<Literal> &allSymbols, std::deque<Literal> &resolutedSymbols) const {
-    for(Literal& l : allSymbols) {
-        Literal inverse(l.toString());
-        inverse.negated = !inverse.negated;
-        if(std::find(allSymbols.begin(), allSymbols.end(), inverse) == allSymbols.end())
-            resolutedSymbols.push_back(l);
-    }
-}*/
-
-/*
-void Clause::addLiterals(std::deque<Literal> &to,
-                         std::deque<Literal> &symbols) {
-    std::deque<Literal>::const_iterator iterator;
-    for(iterator = symbols.begin(); iterator != symbols.end(); ++iterator) {
-        to.push_back(*iterator);
-    }
-}*/
 
 std::vector<Clause*> &Clause::getResolutedClauses() {
     return resolutedClauses;
