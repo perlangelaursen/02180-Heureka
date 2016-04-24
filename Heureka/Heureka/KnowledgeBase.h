@@ -17,8 +17,7 @@ namespace Heureka {
 
 class KnowledgeBase {
 private :
-	void updateClause(Clause &clause, double tempDistanceFromStart, Clause &current);
-	void reconstructPath(Clause start, Clause goal);
+	void reconstructPath(int start, int goal);
 	void clausalResolution(Clause& clause);
 	void eliminateDuplicateLiterals(std::deque<Literal, std::allocator<Literal>> &allSymbols,
 									std::deque<Literal, std::allocator<Literal>> &resolutedSymbols);
@@ -27,7 +26,7 @@ private :
 
 	std::vector<Clause> clauses;
 public:
-	void aStar(Clause start, Clause goal);
+	void aStar(int start, Clause goal);
 	void addClause(Clause &clause);
 	const std::vector<Clause> &getClauses() const {
 		return clauses;

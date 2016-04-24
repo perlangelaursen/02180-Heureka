@@ -4,25 +4,24 @@
 
 #include "KnowledgeBase.h"
 
-void KnowledgeBase::aStar(Clause start, Clause goal) {
+void KnowledgeBase::aStar(int start, Clause goal) {
 	std::deque<Clause> queue; // Open set, frontier, to be visited
 
-	start.distanceFromStart = 0;
-	start.calcHeuristicDistance();
-	start.updateTotalDistance();
+	clauses[start].distanceFromStart = 0;
+	clauses[start].calcHeuristicDistance();
+	clauses[start].updateTotalDistance();
 	
-	queue.push_back(start);
+	queue.push_back(clauses[start]);
 
 	double tempDistanceFromStart;
 	std::deque<Clause>::iterator iterator;
 
 	while (!queue.empty()) {
 		std::sort(queue.begin(), queue.end());
-		Clause current = queue.front();
 		int currentIndex = getIndex(queue.front());
 
 		if (clauses[currentIndex] == goal) {
-			reconstructPath(start, clauses[currentIndex]);
+			reconstructPath(start, currentIndex);
 			queue.clear();
 			break;
 		}
@@ -31,17 +30,17 @@ void KnowledgeBase::aStar(Clause start, Clause goal) {
 		clauses[currentIndex].visited = true;
 		clausalResolution(clauses[currentIndex]);
 
-		std::vector<int> neighbors = current.getResolutedClauses();
+		std::vector<int> neighbors = clauses[currentIndex].getResolutedClauses();
 		for (auto neighbor : neighbors) {
 			if (clauses[neighbor].visited) {
 				continue;
 			}
 
-			tempDistanceFromStart = current.distanceFromStart + current.heuristic_distance;
+			tempDistanceFromStart = clauses[currentIndex].distanceFromStart + clauses[currentIndex].heuristic_distance;
 			iterator = std::find(queue.begin(), queue.end(), clauses[neighbor]);
 
 			if (iterator == queue.end()) {
-				updateClause(clauses[neighbor], tempDistanceFromStart, current);
+				updateClause(neighbor, tempDistanceFromStart, currentIndex);
 				queue.push_front(clauses[neighbor]);
 			}
 			else if (tempDistanceFromStart >= clauses[neighbor].distanceFromStart) {
@@ -59,27 +58,27 @@ void KnowledgeBase::aStar(Clause start, Clause goal) {
 
 }
 
+void KnowledgeBase::reconstructPath(int start, int goal) {
+	std::deque<std::string> path;
+	int currentIndex = goal;
+	int previousIndex;
+	path.push_front(clauses[goal].toString());
+	while (currentIndex != start) {
+		previousIndex = clauses[currentIndex].cameFrom;
+		path.push_front(clauses[previousIndex].toString());
+		currentIndex = previousIndex;
+	}
+	std::cout << "Resolution:\n";
+	for (auto s : path) {
+		std::cout << s << "\n";
+	}
+}
+
 void KnowledgeBase::updateClause(int clause, double tempDistanceFromStart, int current) {
 	clauses[clause].cameFrom = current;
 	clauses[clause].distanceFromStart = tempDistanceFromStart;
 	clauses[clause].calcHeuristicDistance();
 	clauses[clause].updateTotalDistance();
-}
-
-void KnowledgeBase::reconstructPath(Clause start, Clause goal) {
-	std::deque<std::string> path;
-	Clause current = goal;
-	Clause *previous;
-
-	while (current != start) {
-		previous = current.cameFrom;
-		path.push_front(previous->toString());
-		current = *previous;
-	}
-
-	for (auto s : path) {
-		std::cout << s << "\n";
-	}
 }
 
 void KnowledgeBase::addClause(Clause &clause) {
@@ -100,11 +99,11 @@ void KnowledgeBase::clausalResolution(Clause &clause) {
 		auto iterator = std::find(clauses.begin(), clauses.end(), result);
 		if(iterator == clauses.end()) {
 			clauses.push_back(result);
-			clause.addNeighbor(&clauses[clauses.size() -1 ]);
+			clause.addNeighbor(boost::lexical_cast<int>(clauses.size() - 1));
 		} else if (clause == result) {
 			continue;
 		} else {
-			clause.addNeighbor(&clauses[std::distance(clauses.begin(), iterator)]);
+			clause.addNeighbor(boost::lexical_cast<int>(std::distance(clauses.begin(), iterator)));
 		}
 	}
 }
@@ -137,13 +136,3 @@ int KnowledgeBase::getIndex(Clause &clause) {
 	}
 	return -1;
 }
-
-
-
-
-
-
-
-
-
-
