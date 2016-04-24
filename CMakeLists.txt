@@ -10,7 +10,6 @@ set(SOURCE_FILES
         Heureka/Heureka/State.h
         Heureka/Heureka/Pathfinding.cpp
         Heureka/Heureka/Pathfinding.h
-        Heureka/Heureka/Comparator.h
         Heureka/Heureka/PathfindingDriver.cpp
         Heureka/Heureka/PathfindingDriver.h
         Heureka/Heureka/Literal.h
