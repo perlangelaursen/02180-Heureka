@@ -9,7 +9,7 @@
 #include <vector>
 #include "Point.h"
 
-typedef std::pair<int, std::string> neighbor;
+using neighbor = std::pair<int, std::string>;
 
 namespace Heureka {
     struct State {

@@ -14,7 +14,6 @@
 #include <boost/lexical_cast.hpp>
 #include "Point.h"
 #include "State.h"
-#include "Comparator.h"
 
 namespace Heureka {
     class Pathfinding;

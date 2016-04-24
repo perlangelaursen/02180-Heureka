@@ -6,7 +6,11 @@
 #define INC_02180_HEUREKA_KNOWLEDGEBASE_H
 
 #include <vector>
+#include <algorithm>
+#include <limits>
+#include <functional>
 #include <iostream>
+#include <deque>
 #include <boost/lexical_cast.hpp>
 #include "Clause.h"
 #include "Literal.h"
