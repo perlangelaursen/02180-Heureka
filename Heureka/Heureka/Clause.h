@@ -19,8 +19,6 @@ class Clause {
 private:
     std::deque<Literal> symbols;
     std::vector<Clause*> resolutedClauses;
-    //std::vector<Clause> localKnowledgeBase;
-    //std::vector<Clause> childKnowledgeBase;
 
 public:
 	Clause();
