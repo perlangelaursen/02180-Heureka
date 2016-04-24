@@ -64,7 +64,7 @@ bool Clause::operator!=(const Clause &rhs) const {
 
 void Clause::operator=(const Clause &rhs) {
     symbols = rhs.symbols;
-    resolutedClauses = rhs.resolutedClauses;
+    neighbors = rhs.neighbors;
     distanceFromStart = rhs.distanceFromStart;
     heuristic_distance = rhs.heuristic_distance;
     totalDistance = rhs.totalDistance;
@@ -77,11 +77,7 @@ std::ostream &operator<<(std::ostream &os, const Clause &clause) {
     return os;
 }
 
-std::vector<neighbor> &Clause::getResolutedClauses() {
-    return resolutedClauses;
-}
-
 void Clause::addNeighbor(int neighbor, std::string clause) {
-    resolutedClauses.push_back(std::make_pair(neighbor, clause));
+    neighbors.push_back(std::make_pair(neighbor, clause));
 }
 
