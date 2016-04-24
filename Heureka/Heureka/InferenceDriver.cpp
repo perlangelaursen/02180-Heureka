@@ -52,17 +52,12 @@ void InferenceDriver::runAStar() {
     Clause start(std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
     Literal entailed = readEntailed();
     start.addLiteralToClause(entailed);
+    knowledgeBase.addClause(start);
+    int startIndex =boost::lexical_cast<int>(knowledgeBase.getClauses().size() -1);
 
     Clause empty(std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
     Literal emptyLiteral("Ø");
     empty.addLiteralToClause(emptyLiteral);
 
-    knowledgeBase.aStar(start, empty);
+    knowledgeBase.aStar(startIndex, empty);
 }
-
-
-
-
-
-
-
