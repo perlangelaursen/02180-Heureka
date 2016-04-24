@@ -30,27 +30,28 @@ void KnowledgeBase::aStar(int start, Clause goal) {
 		clauses[currentIndex].visited = true;
 		clausalResolution(clauses[currentIndex]);
 
-		std::vector<int> neighbors = clauses[currentIndex].getResolutedClauses();
+		std::vector<std::pair<int, std::string>> neighbors = clauses[currentIndex].getResolutedClauses();
 		for (auto neighbor : neighbors) {
-			if (clauses[neighbor].visited) {
+			int index = neighbor.first;
+			if (clauses[index].visited) {
 				continue;
 			}
 
 			tempDistanceFromStart = clauses[currentIndex].distanceFromStart + 1;
-			iterator = std::find(queue.begin(), queue.end(), clauses[neighbor]);
+			iterator = std::find(queue.begin(), queue.end(), clauses[index]);
 
 			if (iterator == queue.end()) {
-				updateClause(neighbor, tempDistanceFromStart, currentIndex);
-				queue.push_front(clauses[neighbor]);
+				updateClause(index, tempDistanceFromStart, currentIndex);
+				queue.push_front(clauses[index]);
 			}
-			else if (tempDistanceFromStart >= clauses[neighbor].distanceFromStart) {
+			else if (tempDistanceFromStart >= clauses[index].distanceFromStart) {
 				continue;
 			}
 			else {
-				updateClause(neighbor, tempDistanceFromStart, currentIndex);
-				iterator->cameFrom = clauses[neighbor].cameFrom;
-				iterator->distanceFromStart = clauses[neighbor].distanceFromStart;
-				iterator->heuristic_distance = clauses[neighbor].heuristic_distance;
+				updateClause(index, tempDistanceFromStart, currentIndex);
+				iterator->cameFrom = clauses[index].cameFrom;
+				iterator->distanceFromStart = clauses[index].distanceFromStart;
+				iterator->heuristic_distance = clauses[index].heuristic_distance;
 				iterator->updateTotalDistance();
 			}
 		}
@@ -99,11 +100,11 @@ void KnowledgeBase::clausalResolution(Clause &clause) {
 		auto iterator = std::find(clauses.begin(), clauses.end(), result);
 		if(iterator == clauses.end()) {
 			clauses.push_back(result);
-			clause.addNeighbor(boost::lexical_cast<int>(clauses.size() - 1));
+			clause.addNeighbor(boost::lexical_cast<int>(clauses.size() - 1), c.toString());
 		} else if (clause == result) {
 			continue;
 		} else {
-			clause.addNeighbor(boost::lexical_cast<int>(std::distance(clauses.begin(), iterator)));
+			clause.addNeighbor(boost::lexical_cast<int>(std::distance(clauses.begin(), iterator)), c.toString());
 		}
 	}
 }
