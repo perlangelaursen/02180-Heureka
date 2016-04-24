@@ -102,16 +102,17 @@ void KnowledgeBase::clausalResolution(Clause &clause) {
 		Clause result(std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
 
 		result.setSymbols(resolutedSymbols);
-		auto iterator = std::find(clauses.begin(), clauses.end(), result);
+		std::cout << clause << " && " << c << " => " << result << "\n";
+		std::vector<Clause>::const_iterator iterator = std::find(clauses.begin(), clauses.end(), result);
 		if(iterator == clauses.end()) {
 			clauses.push_back(result);
 			clause.addNeighbor(boost::lexical_cast<int>(clauses.size() - 1), c.toString());
-		} else if (clause == result) {
+		} else if (*iterator == result) {
 			continue;
 		} else {
-			clause.addNeighbor(boost::lexical_cast<int>(std::distance(clauses.begin(), iterator)), c.toString());
+			clause.addNeighbor(boost::lexical_cast<int>(std::distance(clauses.cbegin(), iterator)), c.toString());
 		}
-		std::cout << clause << " && " << c << " => " << result << "\n";
+
 	}
 }
 
