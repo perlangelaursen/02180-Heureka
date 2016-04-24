@@ -19,7 +19,6 @@ namespace Heureka {
 class Clause {
 private:
     std::deque<Literal> symbols;
-    std::vector<neighbor> resolutedClauses;
 
 public:
 	Clause();
@@ -30,6 +29,7 @@ public:
     double totalDistance;
     bool visited = false;
 	int cameFrom;
+    std::vector<neighbor> neighbors;
 
     Clause(double distanceFromStart, double heuristic_distance) : distanceFromStart(distanceFromStart),
                                                                   heuristic_distance(heuristic_distance) {

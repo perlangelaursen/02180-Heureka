@@ -30,7 +30,7 @@ void KnowledgeBase::aStar(int start, Clause goal) {
 		clauses[currentIndex].visited = true;
 		clausalResolution(clauses[currentIndex]);
 
-		std::vector<std::pair<int, std::string>> neighbors = clauses[currentIndex].getResolutedClauses();
+		std::vector<std::pair<int, std::string>> neighbors = clauses[currentIndex].neighbors;
 		for (auto neighbor : neighbors) {
 			int index = neighbor.first;
 			if (clauses[index].visited) {
@@ -63,11 +63,16 @@ void KnowledgeBase::reconstructPath(int start, int goal) {
 	std::deque<std::string> path;
 	int currentIndex = goal;
 	int previousIndex;
-	path.push_front(clauses[goal].toString());
+	std::vector<std::pair<int, std::string>>::iterator iterator;
 	while (currentIndex != start) {
 		previousIndex = clauses[currentIndex].cameFrom;
-		path.push_front(clauses[previousIndex].toString());
+		iterator = std::find_if(clauses[previousIndex].neighbors.begin(), clauses[previousIndex].neighbors.end(),
+								[currentIndex](const std::pair<int, std::string> element) {
+									return element.first == currentIndex;
+								});
 		currentIndex = previousIndex;
+		path.push_front(clauses[previousIndex].toString() + " && " + iterator -> second + " => " +
+								clauses[currentIndex].toString());
 	}
 	std::cout << "Resolution:\n";
 	for (auto s : path) {
