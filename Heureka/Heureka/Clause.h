@@ -7,9 +7,10 @@
 
 #include <vector>
 #include <deque>
-#include <limits>
 #include <boost/lexical_cast.hpp>
 #include "Literal.h"
+
+using neighbor = std::pair<int, std::string>;
 
 namespace Heureka {
     class Clause;
@@ -18,7 +19,7 @@ namespace Heureka {
 class Clause {
 private:
     std::deque<Literal> symbols;
-    std::vector<int> resolutedClauses;
+    std::vector<neighbor> resolutedClauses;
 
 public:
 	Clause();
@@ -47,7 +48,7 @@ public:
     void calcHeuristicDistance();
     std::string toString() const;
 
-    std::vector<int> &getResolutedClauses();
+    std::vector<neighbor> &getResolutedClauses();
 
     // Comparison operators
     bool operator() (const Clause& lhs, const Clause& rhs) const;
@@ -56,7 +57,7 @@ public:
     bool operator!= (const Clause& rhs) const;
     void operator= (const Clause& rhs);
 
-    void addNeighbor(int neighbor);
+    void addNeighbor(int neighbor, std::string clause);
 
     friend std::ostream& operator<< (std::ostream& os, const Clause& clause);
     std::deque<Literal, std::allocator<Literal>> &getSymbols() {

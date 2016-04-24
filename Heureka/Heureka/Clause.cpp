@@ -77,11 +77,11 @@ std::ostream &operator<<(std::ostream &os, const Clause &clause) {
     return os;
 }
 
-std::vector<int> &Clause::getResolutedClauses() {
+std::vector<neighbor> &Clause::getResolutedClauses() {
     return resolutedClauses;
 }
 
-void Clause::addNeighbor(int neighbor) {
-    resolutedClauses.push_back(neighbor);
+void Clause::addNeighbor(int neighbor, std::string clause) {
+    resolutedClauses.push_back(std::make_pair(neighbor, clause));
 }
 
