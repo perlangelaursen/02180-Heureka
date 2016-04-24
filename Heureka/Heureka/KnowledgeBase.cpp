@@ -28,6 +28,7 @@ void KnowledgeBase::aStar(Clause start, Clause goal) {
 
 		queue.pop_front();
 		current.visited = true;
+		clausalResolution(current);
 
 		std::vector<Clause*> neighbors = current.getResolutedClauses();
 		for (auto neighbor : neighbors) {
@@ -97,9 +98,12 @@ void KnowledgeBase::clausalResolution(Clause &clause) {
 		Clause result(std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
 
 		result.setSymbols(resolutedSymbols);
-		if(std::find(clauses.begin(), clauses.end(), result) == clauses.end()) {
+		auto iterator = std::find(clauses.begin(), clauses.end(), result);
+		if(iterator == clauses.end()) {
 			clauses.push_back(result);
 			clause.addNeighbor(&clauses[clauses.size() -1 ]);
+		} else {
+			clause.addNeighbor(&clauses[std::distance(clauses.begin(), iterator)]);
 		}
 	}
 }
