@@ -48,8 +48,6 @@ public:
     void calcHeuristicDistance();
     std::string toString() const;
 
-    std::vector<neighbor> &getResolutedClauses();
-
     // Comparison operators
     bool operator() (const Clause& lhs, const Clause& rhs) const;
     bool operator< (const Clause& rhs) const;

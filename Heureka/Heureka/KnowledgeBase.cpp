@@ -111,6 +111,7 @@ void KnowledgeBase::clausalResolution(Clause &clause) {
 		} else {
 			clause.addNeighbor(boost::lexical_cast<int>(std::distance(clauses.begin(), iterator)), c.toString());
 		}
+		std::cout << clause << " && " << c << " => " << result << "\n";
 	}
 }
 
