@@ -102,6 +102,8 @@ void KnowledgeBase::clausalResolution(Clause &clause) {
 		if(iterator == clauses.end()) {
 			clauses.push_back(result);
 			clause.addNeighbor(&clauses[clauses.size() -1 ]);
+		} else if (clause == result) {
+			continue;
 		} else {
 			clause.addNeighbor(&clauses[std::distance(clauses.begin(), iterator)]);
 		}
@@ -122,6 +124,10 @@ void KnowledgeBase::eliminateDuplicateLiterals(std::deque<Literal, std::allocato
 		inverse.negated = !inverse.negated;
 		if(std::find(allSymbols.begin(), allSymbols.end(), inverse) == allSymbols.end())
 			resolutedSymbols.push_back(l);
+	}
+	if(resolutedSymbols.size() == 0) {
+		Literal emptyLiteral("Ø");
+		resolutedSymbols.push_back(emptyLiteral);
 	}
 }
 
