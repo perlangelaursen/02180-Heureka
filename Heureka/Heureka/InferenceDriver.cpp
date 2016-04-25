@@ -14,7 +14,7 @@ void InferenceDriver::run() {
 void InferenceDriver::readKB() {
     std::string tempString;
     std::ifstream ifs(KB);
-    boost::char_separator<char> separator(",");
+    boost::char_separator<char> separator(" || ");
 
     if(!(ifs.is_open())) {
         std::cerr << "Error! Could not open the file" + KB;
