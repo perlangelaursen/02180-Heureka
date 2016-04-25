@@ -56,7 +56,7 @@ void InferenceDriver::runAStar() {
     int startIndex =boost::lexical_cast<int>(knowledgeBase.getClauses().size() -1);
 
     Clause empty(std::numeric_limits<double>::max(), 0);
-    Literal emptyLiteral("");
+    Literal emptyLiteral("Ø");
     empty.addLiteralToClause(emptyLiteral);
 
     knowledgeBase.aStar(startIndex, empty);

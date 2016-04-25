@@ -106,7 +106,7 @@ void Clause::eliminateDuplicateLiterals(std::unordered_set<Literal> allSymbols,
             resolutedSymbols.push_back(l);
     }
     if(resolutedSymbols.size() == 0) {
-        Literal emptyLiteral("");
+        Literal emptyLiteral("Ø");
         resolutedSymbols.push_back(emptyLiteral);
     }
 
