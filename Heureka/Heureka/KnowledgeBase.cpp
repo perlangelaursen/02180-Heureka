@@ -93,6 +93,16 @@ void KnowledgeBase::addClause(Clause &clause) {
 
 void KnowledgeBase::clausalResolution(Clause &clause) {
 	std::vector<Clause>::iterator iterator;
+	for(std::vector<Clause>::iterator iter = clauses.begin(); iter != clauses.end(); ++iter){
+		Clause result = clause.resolution(*iter);
+		std::cout << clause << " && " << *iter << " => " << result << "\n";
+		if(iterator == clauses.end()) {
+			clauses.push_back(result);
+			clause.addNeighbor(boost::lexical_cast<int>(std::distance(clauses.begin(), iterator)), iter -> toString());
+		}
+	}
+
+	/*
 	for(Clause& c : clauses) {
 		Clause result = clause.resolution(c);
 		std::cout << clause << " && " << c << " => " << result << "\n";
@@ -105,7 +115,7 @@ void KnowledgeBase::clausalResolution(Clause &clause) {
 		} else {
 			clause.addNeighbor(boost::lexical_cast<int>(std::distance(clauses.begin(), iterator)), c.toString());
 		}
-	}
+	}*/
 }
 
 int KnowledgeBase::getIndex(Clause &clause) {

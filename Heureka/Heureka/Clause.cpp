@@ -93,6 +93,7 @@ Clause Clause::resolution(Clause &clause) {
         eliminateDuplicateLiterals(allSymbols, resolutedSymbols);
         Clause result(std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
         result.setSymbols(resolutedSymbols);
+        return result;
     }
 
     return Clause();
@@ -107,7 +108,7 @@ void Clause::eliminateDuplicateLiterals(std::deque<Literal, std::allocator<Liter
             resolutedSymbols.push_back(l);
     }
     if(resolutedSymbols.size() == 0) {
-        Literal emptyLiteral("Ø");
+        Literal emptyLiteral("");
         resolutedSymbols.push_back(emptyLiteral);
     }
 
