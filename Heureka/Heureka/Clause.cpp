@@ -95,8 +95,6 @@ Clause Clause::resolution(Clause &clause) {
         result.setSymbols(resolutedSymbols);
         return result;
     }
-
-    return Clause();
 }
 
 void Clause::eliminateDuplicateLiterals(std::deque<Literal, std::allocator<Literal>> &allSymbols,

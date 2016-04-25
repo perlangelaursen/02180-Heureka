@@ -70,9 +70,9 @@ void KnowledgeBase::reconstructPath(int start, int goal) {
 								[currentIndex](const std::pair<int, std::string> element) {
 									return element.first == currentIndex;
 								});
-		currentIndex = previousIndex;
 		path.push_front(clauses[previousIndex].toString() + " && " + iterator -> second + " => " +
-								clauses[currentIndex].toString());
+						clauses[currentIndex].toString());
+		currentIndex = previousIndex;
 	}
 	std::cout << "Resolution:\n";
 	for (auto s : path) {
@@ -101,21 +101,6 @@ void KnowledgeBase::clausalResolution(Clause &clause) {
 			clause.addNeighbor(boost::lexical_cast<int>(std::distance(clauses.begin(), iterator)), iter -> toString());
 		}
 	}
-
-	/*
-	for(Clause& c : clauses) {
-		Clause result = clause.resolution(c);
-		std::cout << clause << " && " << c << " => " << result << "\n";
-		iterator = std::find(clauses.begin(), clauses.end(), result);
-		if(iterator == clauses.end()) {
-			clauses.push_back(result);
-			clause.addNeighbor(boost::lexical_cast<int>(std::distance(clauses.begin(), iterator)), c.toString());
-		} else if (*iterator == clause) {
-			continue;
-		} else {
-			clause.addNeighbor(boost::lexical_cast<int>(std::distance(clauses.begin(), iterator)), c.toString());
-		}
-	}*/
 }
 
 int KnowledgeBase::getIndex(Clause &clause) {
