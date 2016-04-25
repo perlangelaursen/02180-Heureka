@@ -22,7 +22,8 @@ namespace Heureka {
 class KnowledgeBase {
 private :
 	void reconstructPath(int start, int goal);
-	void clausalResolution(Clause& clause);
+
+	void clausalResolution(int index);
 
 	int getIndex(Clause& clause);
 

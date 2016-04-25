@@ -82,7 +82,7 @@ void Clause::addNeighbor(int neighbor, std::string clause) {
 }
 
 Clause Clause::resolution(Clause &clause) {
-    std::deque<Literal> allSymbols;
+    std::unordered_set<Literal> allSymbols;
     std::deque<Literal> resolutedSymbols;
     if (*this == clause) {
         return *this;
@@ -97,9 +97,9 @@ Clause Clause::resolution(Clause &clause) {
     }
 }
 
-void Clause::eliminateDuplicateLiterals(std::deque<Literal, std::allocator<Literal>> &allSymbols,
+void Clause::eliminateDuplicateLiterals(std::unordered_set<Literal> allSymbols,
                                         std::deque<Literal, std::allocator<Literal>> &resolutedSymbols) {
-    for(Literal& l : allSymbols) {
+    for(const Literal l : allSymbols) {
         Literal inverse(l.toString());
         inverse.negated = !inverse.negated;
         if(std::find(allSymbols.begin(), allSymbols.end(), inverse) == allSymbols.end())
@@ -112,11 +112,11 @@ void Clause::eliminateDuplicateLiterals(std::deque<Literal, std::allocator<Liter
 
 }
 
-void Clause::joinLiterals(std::deque<Literal, std::allocator<Literal>> &allSymbols,
+void Clause::joinLiterals(std::unordered_set<Literal>& allSymbols,
                           std::deque<Literal, std::allocator<Literal>> &temp) {
     std::deque<Literal>::const_iterator iterator;
     for(iterator = temp.begin(); iterator != temp.end(); ++iterator) {
-        allSymbols.push_back(*iterator);
+        allSymbols.insert(*iterator);
     }
 }
 

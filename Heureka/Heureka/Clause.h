@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <deque>
+#include <unordered_set>
 #include <boost/lexical_cast.hpp>
 #include "Literal.h"
 
@@ -39,7 +40,8 @@ public:
     Clause(const Clause& other) : symbols(other.symbols),
                                   distanceFromStart(other.distanceFromStart),
                                   heuristic_distance(other.heuristic_distance),
-                                  visited(other.visited) {
+                                  visited(other.visited), cameFrom(other.cameFrom),
+                                  neighbors(other.neighbors){
         updateTotalDistance();
     }
 
@@ -56,9 +58,9 @@ public:
     void operator= (const Clause& rhs);
 
     Clause resolution(Clause& clause);
-    void eliminateDuplicateLiterals(std::deque<Literal, std::allocator<Literal>> &allSymbols,
+    void eliminateDuplicateLiterals(std::unordered_set<Literal> allSymbols,
                                     std::deque<Literal, std::allocator<Literal>> &resolutedSymbols);
-    void joinLiterals(std::deque<Literal, std::allocator<Literal>> &allSymbols,
+    void joinLiterals(std::unordered_set<Literal>& allSymbols,
                       std::deque<Literal, std::allocator<Literal>> &temp);
     void addNeighbor(int neighbor, std::string clause);
 
