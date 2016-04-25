@@ -105,11 +105,6 @@ void Clause::eliminateDuplicateLiterals(std::unordered_set<Literal> allSymbols,
         if(std::find(allSymbols.begin(), allSymbols.end(), inverse) == allSymbols.end())
             resolutedSymbols.push_back(l);
     }
-    if(resolutedSymbols.size() == 0) {
-        Literal emptyLiteral("Ø");
-        resolutedSymbols.push_back(emptyLiteral);
-    }
-
 }
 
 void Clause::joinLiterals(std::unordered_set<Literal>& allSymbols,
