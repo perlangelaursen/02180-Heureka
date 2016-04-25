@@ -55,6 +55,11 @@ public:
     bool operator!= (const Clause& rhs) const;
     void operator= (const Clause& rhs);
 
+    Clause resolution(Clause& clause);
+    void eliminateDuplicateLiterals(std::deque<Literal, std::allocator<Literal>> &allSymbols,
+                                    std::deque<Literal, std::allocator<Literal>> &resolutedSymbols);
+    void joinLiterals(std::deque<Literal, std::allocator<Literal>> &allSymbols,
+                      std::deque<Literal, std::allocator<Literal>> &temp);
     void addNeighbor(int neighbor, std::string clause);
 
     friend std::ostream& operator<< (std::ostream& os, const Clause& clause);

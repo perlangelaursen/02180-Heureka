@@ -92,48 +92,19 @@ void KnowledgeBase::addClause(Clause &clause) {
 }
 
 void KnowledgeBase::clausalResolution(Clause &clause) {
-	for(auto c : clauses) {
-		std::deque<Literal> allSymbols;
-		std::deque<Literal> resolutedSymbols;
-		joinLiterals(allSymbols, clause.getSymbols());
-		joinLiterals(allSymbols, c.getSymbols());
-
-		eliminateDuplicateLiterals(allSymbols, resolutedSymbols);
-		Clause result(std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
-
-		result.setSymbols(resolutedSymbols);
+	std::vector<Clause>::iterator iterator;
+	for(Clause& c : clauses) {
+		Clause result = clause.resolution(c);
 		std::cout << clause << " && " << c << " => " << result << "\n";
-		std::vector<Clause>::const_iterator iterator = std::find(clauses.begin(), clauses.end(), result);
+		iterator = std::find(clauses.begin(), clauses.end(), result);
 		if(iterator == clauses.end()) {
 			clauses.push_back(result);
-			clause.addNeighbor(boost::lexical_cast<int>(clauses.size() - 1), c.toString());
-		} else if (*iterator == result) {
+			clause.addNeighbor(boost::lexical_cast<int>(std::distance(clauses.begin(), iterator)), c.toString());
+		} else if (*iterator == clause) {
 			continue;
 		} else {
-			clause.addNeighbor(boost::lexical_cast<int>(std::distance(clauses.cbegin(), iterator)), c.toString());
+			clause.addNeighbor(boost::lexical_cast<int>(std::distance(clauses.begin(), iterator)), c.toString());
 		}
-
-	}
-}
-
-void KnowledgeBase::joinLiterals(std::deque<Literal> &to, std::deque<Literal> &symbols) {
-	std::deque<Literal>::const_iterator iterator;
-	for(iterator = symbols.begin(); iterator != symbols.end(); ++iterator) {
-		to.push_back(*iterator);
-	}
-}
-
-void KnowledgeBase::eliminateDuplicateLiterals(std::deque<Literal, std::allocator<Literal>> &allSymbols,
-											   std::deque<Literal, std::allocator<Literal>> &resolutedSymbols) {
-	for(Literal& l : allSymbols) {
-		Literal inverse(l.toString());
-		inverse.negated = !inverse.negated;
-		if(std::find(allSymbols.begin(), allSymbols.end(), inverse) == allSymbols.end())
-			resolutedSymbols.push_back(l);
-	}
-	if(resolutedSymbols.size() == 0) {
-		Literal emptyLiteral("Ø");
-		resolutedSymbols.push_back(emptyLiteral);
 	}
 }
 

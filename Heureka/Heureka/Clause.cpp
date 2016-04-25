@@ -81,3 +81,43 @@ void Clause::addNeighbor(int neighbor, std::string clause) {
     neighbors.push_back(std::make_pair(neighbor, clause));
 }
 
+Clause Clause::resolution(Clause &clause) {
+    std::deque<Literal> allSymbols;
+    std::deque<Literal> resolutedSymbols;
+    if (*this == clause) {
+        return *this;
+    } else {
+        joinLiterals(allSymbols, this->symbols);
+        joinLiterals(allSymbols, clause.symbols);
+
+        eliminateDuplicateLiterals(allSymbols, resolutedSymbols);
+        Clause result(std::numeric_limits<double>::max(), std::numeric_limits<double>::max());
+        result.setSymbols(resolutedSymbols);
+    }
+
+    return Clause();
+}
+
+void Clause::eliminateDuplicateLiterals(std::deque<Literal, std::allocator<Literal>> &allSymbols,
+                                        std::deque<Literal, std::allocator<Literal>> &resolutedSymbols) {
+    for(Literal& l : allSymbols) {
+        Literal inverse(l.toString());
+        inverse.negated = !inverse.negated;
+        if(std::find(allSymbols.begin(), allSymbols.end(), inverse) == allSymbols.end())
+            resolutedSymbols.push_back(l);
+    }
+    if(resolutedSymbols.size() == 0) {
+        Literal emptyLiteral("Ø");
+        resolutedSymbols.push_back(emptyLiteral);
+    }
+
+}
+
+void Clause::joinLiterals(std::deque<Literal, std::allocator<Literal>> &allSymbols,
+                          std::deque<Literal, std::allocator<Literal>> &temp) {
+    std::deque<Literal>::const_iterator iterator;
+    for(iterator = temp.begin(); iterator != temp.end(); ++iterator) {
+        allSymbols.push_back(*iterator);
+    }
+}
+
