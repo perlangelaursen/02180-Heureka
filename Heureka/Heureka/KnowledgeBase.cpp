@@ -96,9 +96,10 @@ void KnowledgeBase::clausalResolution(Clause &clause) {
 	for(std::vector<Clause>::iterator iter = clauses.begin(); iter != clauses.end(); ++iter){
 		Clause result = clause.resolution(*iter);
 		std::cout << clause << " && " << *iter << " => " << result << "\n";
+		//iterator = std::find(clauses.begin(), clauses.end(), result);
 		if(iterator == clauses.end()) {
 			clauses.push_back(result);
-			clause.addNeighbor(boost::lexical_cast<int>(std::distance(clauses.begin(), iterator)), iter -> toString());
+			clause.addNeighbor(boost::lexical_cast<int>(clauses.size() - 1), iter -> toString());
 		}
 	}
 }
