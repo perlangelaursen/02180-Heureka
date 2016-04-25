@@ -28,7 +28,7 @@ void KnowledgeBase::aStar(int start, Clause goal) {
 
 		queue.pop_front();
 		clauses[currentIndex].visited = true;
-		clausalResolution(clauses[currentIndex]);
+		clausalResolution(currentIndex);
 
 		std::vector<std::pair<int, std::string>> neighbors = clauses[currentIndex].neighbors;
 		for (auto neighbor : neighbors) {
@@ -91,19 +91,6 @@ void KnowledgeBase::addClause(Clause &clause) {
 	clauses.push_back(clause);
 }
 
-void KnowledgeBase::clausalResolution(Clause &clause) {
-	std::vector<Clause>::iterator iterator;
-	for(std::vector<Clause>::iterator iter = clauses.begin(); iter != clauses.end(); ++iter){
-		Clause result = clause.resolution(*iter);
-		std::cout << clause << " && " << *iter << " => " << result << "\n";
-		//iterator = std::find(clauses.begin(), clauses.end(), result);
-		if(iterator == clauses.end()) {
-			clauses.push_back(result);
-			clause.addNeighbor(boost::lexical_cast<int>(clauses.size() - 1), iter -> toString());
-		}
-	}
-}
-
 int KnowledgeBase::getIndex(Clause &clause) {
 	auto iterator = std::find(clauses.begin(), clauses.end(), clause);
 	if(iterator != clauses.end()) {
@@ -111,3 +98,19 @@ int KnowledgeBase::getIndex(Clause &clause) {
 	}
 	return -1;
 }
+
+void KnowledgeBase::clausalResolution(int index) {
+	for(int i = 0; i < clauses.size(); i++) {
+		Clause result = clauses[index].resolution(clauses[i]);
+		std::cout << clauses[index] << " && " << clauses[i] << " => " << result << "\n";
+		bool isNotInClauses = true;
+		for(int j = 0; j < clauses.size(); j++) {
+			if(result == clauses[j]) isNotInClauses = false;
+		}
+		if(isNotInClauses) {
+			clauses.push_back(result);
+			clauses[index].addNeighbor((int) (clauses.size() - 1), clauses[i].toString());
+		}
+	}
+}
+
