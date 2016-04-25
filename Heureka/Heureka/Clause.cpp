@@ -10,7 +10,7 @@ Clause::Clause() {
 }
 
 Clause::~Clause() {
-	//delete cameFrom;
+
 }
 
 void Clause::updateTotalDistance() {
