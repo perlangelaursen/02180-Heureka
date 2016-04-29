@@ -66,9 +66,7 @@ public:
 
     friend std::ostream& operator<< (std::ostream& os, const Clause& clause);
 
-    void setSymbols(const std::deque<Literal, std::allocator<Literal>> &symbols) {
-        Clause::symbols = symbols;
-    }
+    void setSymbols(const std::deque<Literal, std::allocator<Literal>> &symbols);
 };
 
 

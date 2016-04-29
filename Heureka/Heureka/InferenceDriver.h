@@ -18,9 +18,6 @@ namespace Heureka {
 }
 
 class InferenceDriver {
-public:
-    void run();
-
 private:
     std::string KB = "KnowledgeBase.txt";
     std::string entailed = "Entailed.txt";
@@ -29,6 +26,9 @@ private:
     void readKB();
     Literal readEntailed();
     void runAStar();
+
+public:
+    void run();
 };
 
 

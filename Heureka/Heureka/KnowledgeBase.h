@@ -22,20 +22,16 @@ namespace Heureka {
 class KnowledgeBase {
 private :
 	void reconstructPath(int start, int goal);
-
 	void clausalResolution(int index);
-
 	int getIndex(Clause& clause);
-
 	std::vector<Clause> clauses;
+
 public:
 	void aStar(int start, Clause goal);
 	void addClause(Clause &clause);
-	const std::vector<Clause> &getClauses() const {
-		return clauses;
-	}
-
+	const std::vector<Clause> &getClauses() const;
 	void updateClause(int clause, double tempDistanceFromStart, int current);
+	void updateItemInQueue(std::deque<Clause>::iterator &iterator, int index) const;
 };
 
 #endif //INC_02180_HEUREKA_KNOWLEDGEBASE_H

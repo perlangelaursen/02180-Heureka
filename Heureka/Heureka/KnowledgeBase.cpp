@@ -36,7 +36,6 @@ void KnowledgeBase::aStar(int start, Clause goal) {
 
 			tempDistanceFromStart = clauses[currentIndex].distanceFromStart + 1;
 			iterator = std::find(queue.begin(), queue.end(), clauses[index]);
-
 			if (iterator == queue.end()) {
 				updateClause(index, tempDistanceFromStart, currentIndex);
 				queue.push_front(clauses[index]);
@@ -113,4 +112,10 @@ void KnowledgeBase::clausalResolution(int index) {
 		}
 	}
 }
+
+const std::vector<Clause> &KnowledgeBase::getClauses() const {
+	return clauses;
+}
+
+
 

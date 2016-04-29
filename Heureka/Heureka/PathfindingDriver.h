@@ -18,8 +18,6 @@ namespace Heureka {
 }
 
 class PathfindingDriver {
-public:
-    void run();
 private:
     std::string tempString;
     //std::string file = "Copenhagen.txt";
@@ -31,6 +29,9 @@ private:
     void readStateSpace();
     void readDirections();
     int getIndex(std::vector<std::string> &temp, std::ifstream &ifs);
+
+public:
+    void run();
 };
 
 

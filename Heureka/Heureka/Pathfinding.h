@@ -20,14 +20,6 @@ namespace Heureka {
 }
 
 class Pathfinding {
-public:
-	Pathfinding();
-	~Pathfinding();
-	
-	void addState(int x1, int y1, std::string roadName, int x2, int y2);
-	void aStar(int startIndex, int goalIndex);
-	int getIndex(int x, int y);
-
 private:
 	std::deque<Heureka::State> queue;
 	std::vector<Heureka::State> states;
@@ -36,6 +28,15 @@ private:
 	void reconstructPath(int start, int goal);
 	int checkIfStateExists(Heureka::State state);
 	void updateState(const Heureka::State &goal, double tempDistanceFromStart, int current, int index);
+	void updateItemInQueue(std::deque<Heureka::State>::iterator &iterator, int index) const;
+
+public:
+	Pathfinding();
+	~Pathfinding();
+	
+	void addState(int x1, int y1, std::string roadName, int x2, int y2);
+	void aStar(int startIndex, int goalIndex);
+	int getIndex(int x, int y);
 };
 
 

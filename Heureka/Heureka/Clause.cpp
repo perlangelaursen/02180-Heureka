@@ -108,3 +108,9 @@ void Clause::joinLiterals(std::unordered_set<Literal>& allSymbols,
     }
 }
 
+void Clause::setSymbols(const std::deque<Literal, std::allocator<Literal>> &symbols) {
+    Clause::symbols = symbols;
+}
+
+
+

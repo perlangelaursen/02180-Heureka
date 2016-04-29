@@ -11,19 +11,17 @@ namespace Heureka {
     class Point;
 }
 class Heureka::Point {
+private:
+    int x;
+    int y;
+
 public:
     Point(int x, int y) : x(x), y(y) { }
     double calcEuclideanDistance(Point p);
     double calcEuclideanDistance(int pointx, int pointy);
     int getX() const;
     int getY() const;
-    bool operator==(const Point& point) const {
-        return (this->x == point.x) && (this->y == point.y);
-    }
-
-private:
-    int x;
-    int y;
+    bool operator==(const Point& point) const;
 };
 
 #endif //INC_02180_HEUREKA_POINT_H
