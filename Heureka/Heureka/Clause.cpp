@@ -27,8 +27,8 @@ void Clause::calcHeuristicDistance() {
 
 std::string Clause::toString() const {
     std::string out("");
-    for(const Literal& literal : symbols) {
-        out += literal.toString();
+    for(std::deque<Literal>::const_iterator iter = symbols.cbegin(); iter != symbols.cend(); ++iter) {
+        out += iter -> toString();
         out += " || ";
     }
     out = (out.compare("") == 0) ? "Ø" : out.substr(0, out.length() - 4);
@@ -46,8 +46,8 @@ bool Clause::operator<(const Clause &rhs) const {
 
 bool Clause::operator==(const Clause &rhs) const {
     bool isEqual = (rhs.symbols.size() == symbols.size());
-    for(Literal symbol : rhs.symbols) {
-        if(std::find(symbols.begin(), symbols.end(), symbol) == symbols.end())
+    for(std::deque<Literal>::const_iterator iter = rhs.symbols.cbegin(); iter != rhs.symbols.cend(); ++iter) {
+        if(std::find(symbols.begin(), symbols.end(), *iter) == symbols.end())
             isEqual = false;
     }
     return isEqual;
@@ -55,8 +55,8 @@ bool Clause::operator==(const Clause &rhs) const {
 
 bool Clause::operator!=(const Clause &rhs) const {
     bool isNotEqual = (rhs.symbols.size() != symbols.size());
-    for(Literal symbol : rhs.symbols) {
-        if(!(std::find(symbols.begin(), symbols.end(), symbol) == symbols.end()))
+    for(std::deque<Literal>::const_iterator iter = rhs.symbols.cbegin(); iter != rhs.symbols.cend(); ++iter) {
+        if(!(std::find(symbols.begin(), symbols.end(), *iter) == symbols.end()))
             isNotEqual = false;
     }
     return isNotEqual;
@@ -99,18 +99,17 @@ Clause Clause::resolution(Clause &clause) {
 
 void Clause::eliminateDuplicateLiterals(std::unordered_set<Literal> allSymbols,
                                         std::deque<Literal, std::allocator<Literal>> &resolutedSymbols) {
-    for(const Literal l : allSymbols) {
-        Literal inverse(l.toString());
+    for(auto iter = allSymbols.cbegin(); iter != allSymbols.cend(); ++iter) {
+        Literal inverse(iter -> toString());
         inverse.negated = !inverse.negated;
         if(std::find(allSymbols.begin(), allSymbols.end(), inverse) == allSymbols.end())
-            resolutedSymbols.push_back(l);
+            resolutedSymbols.push_back(*iter);
     }
 }
 
 void Clause::joinLiterals(std::unordered_set<Literal>& allSymbols,
                           std::deque<Literal, std::allocator<Literal>> &temp) {
-    std::deque<Literal>::const_iterator iterator;
-    for(iterator = temp.begin(); iterator != temp.end(); ++iterator) {
+    for(auto iterator = temp.cbegin(); iterator != temp.cend(); ++iterator) {
         allSymbols.insert(*iterator);
     }
 }
