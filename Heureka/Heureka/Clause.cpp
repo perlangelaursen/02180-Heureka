@@ -27,7 +27,7 @@ void Clause::calcHeuristicDistance() {
 
 std::string Clause::toString() const {
     std::string out("");
-    for(std::deque<Literal>::const_iterator iter = symbols.cbegin(); iter != symbols.cend(); ++iter) {
+    for(auto iter = symbols.cbegin(); iter != symbols.cend(); ++iter) {
         out += iter -> toString();
         out += " || ";
     }
@@ -46,20 +46,15 @@ bool Clause::operator<(const Clause &rhs) const {
 
 bool Clause::operator==(const Clause &rhs) const {
     bool isEqual = (rhs.symbols.size() == symbols.size());
-    for(std::deque<Literal>::const_iterator iter = rhs.symbols.cbegin(); iter != rhs.symbols.cend(); ++iter) {
-        if(std::find(symbols.begin(), symbols.end(), *iter) == symbols.end())
+    for(auto iterator = rhs.symbols.cbegin(); iterator != rhs.symbols.cend(); ++iterator) {
+        if(std::find(symbols.begin(), symbols.end(), *iterator) == symbols.end())
             isEqual = false;
     }
     return isEqual;
 }
 
 bool Clause::operator!=(const Clause &rhs) const {
-    bool isNotEqual = (rhs.symbols.size() != symbols.size());
-    for(std::deque<Literal>::const_iterator iter = rhs.symbols.cbegin(); iter != rhs.symbols.cend(); ++iter) {
-        if(!(std::find(symbols.begin(), symbols.end(), *iter) == symbols.end()))
-            isNotEqual = false;
-    }
-    return isNotEqual;
+    return !(*this == rhs);
 }
 
 void Clause::operator=(const Clause &rhs) {
