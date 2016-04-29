@@ -6,11 +6,9 @@
 
 void KnowledgeBase::aStar(int start, Clause goal) {
 	std::deque<Clause> queue; // Open set, frontier, to be visited
-
 	clauses[start].distanceFromStart = 0;
 	clauses[start].calcHeuristicDistance();
 	clauses[start].updateTotalDistance();
-	
 	queue.push_back(clauses[start]);
 
 	double tempDistanceFromStart;
@@ -30,8 +28,7 @@ void KnowledgeBase::aStar(int start, Clause goal) {
 		clauses[currentIndex].visited = true;
 		clausalResolution(currentIndex);
 
-		std::vector<std::pair<int, std::string>> neighbors = clauses[currentIndex].neighbors;
-		for (auto neighbor : neighbors) {
+		for (auto neighbor : clauses[currentIndex].neighbors) {
 			int index = neighbor.first;
 			if (clauses[index].visited) {
 				continue;
@@ -49,14 +46,17 @@ void KnowledgeBase::aStar(int start, Clause goal) {
 			}
 			else {
 				updateClause(index, tempDistanceFromStart, currentIndex);
-				iterator->cameFrom = clauses[index].cameFrom;
-				iterator->distanceFromStart = clauses[index].distanceFromStart;
-				iterator->heuristic_distance = clauses[index].heuristic_distance;
-				iterator->updateTotalDistance();
+				updateItemInQueue(iterator, index);
 			}
 		}
 	}
+}
 
+void KnowledgeBase::updateItemInQueue(std::deque<Clause>::iterator &iterator, int index) const {
+	iterator->cameFrom = clauses[index].cameFrom;
+	iterator->distanceFromStart = clauses[index].distanceFromStart;
+	iterator->heuristic_distance = clauses[index].heuristic_distance;
+	iterator->updateTotalDistance();
 }
 
 void KnowledgeBase::reconstructPath(int start, int goal) {

@@ -65,9 +65,6 @@ public:
     void addNeighbor(int neighbor, std::string clause);
 
     friend std::ostream& operator<< (std::ostream& os, const Clause& clause);
-    std::deque<Literal, std::allocator<Literal>> &getSymbols() {
-        return symbols;
-    }
 
     void setSymbols(const std::deque<Literal, std::allocator<Literal>> &symbols) {
         Clause::symbols = symbols;

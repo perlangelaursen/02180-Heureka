@@ -26,7 +26,8 @@ void Pathfinding::addState(int x1, int y1, std::string roadName, int x2, int y2)
 
 void Pathfinding::aStar(int start, int goal) {
     states[start].distanceFromStart = 0;
-    states[start].heuristic_distance = states[start].point.calcEuclideanDistance(states[goal].point);
+    states[start].heuristic_distance = states[start].point
+            .calcEuclideanDistance(states[goal].point.getX(), states[goal].point.getY());
     states[start].updateTotalDistance();
     queue.push_back(states[start]);
     double tempDistanceFromStart;
@@ -57,13 +58,17 @@ void Pathfinding::aStar(int start, int goal) {
                 continue;
             } else {
                 updateState(states[goal], tempDistanceFromStart, currentIndex, index);
-                iterator -> cameFrom = states[index].cameFrom;
-                iterator -> distanceFromStart = states[index].distanceFromStart;
-                iterator -> heuristic_distance = states[index].heuristic_distance;
-                iterator -> updateTotalDistance();
+                updateItemInQueue(iterator, index);
             }
         }
     }
+}
+
+void Pathfinding::updateItemInQueue(std::deque<Heureka::State>::iterator &iterator, int index) const {
+    iterator -> cameFrom = states[index].cameFrom;
+    iterator -> distanceFromStart = states[index].distanceFromStart;
+    iterator -> heuristic_distance = states[index].heuristic_distance;
+    iterator -> updateTotalDistance();
 }
 
 void Pathfinding::updateState(const Heureka::State &goal, double tempDistanceFromStart, int current,
