@@ -109,7 +109,7 @@ void KnowledgeBase::clausalResolution(int index) {
 		}
 		if(isNotInClauses) {
 			clauses.push_back(result);
-			clauses[index].addNeighbor((int) (clauses.size() - 1), clauses[i].toString());
+			clauses[index].addNeighbor(boost::lexical_cast<int>(clauses.size() - 1), clauses[i].toString());
 		}
 	}
 }
