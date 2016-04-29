@@ -21,14 +21,14 @@ namespace Heureka {
         int cameFrom = -1;
         std::vector<neighbor> neighbors;
 
-        State(double distanceFromStart, double heuristic_distance, const Point point) : distanceFromStart(
-                distanceFromStart), heuristic_distance(heuristic_distance), point(point) {
+        State(double distanceFromStart, double heuristic_distance, const Point point) : point(point), distanceFromStart(
+                distanceFromStart), heuristic_distance(heuristic_distance) {
             updateTotalDistance();
         }
 
-        State(const State& other) : distanceFromStart(other.distanceFromStart),
+        State(const State& other) : point(other.point), distanceFromStart(other.distanceFromStart),
                                     heuristic_distance(other.heuristic_distance),
-                                    point(other.point), visited(other.visited),
+                                    visited(other.visited),
                                     cameFrom(other.cameFrom), neighbors(other.neighbors){
             updateTotalDistance();
         }
