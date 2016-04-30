@@ -99,11 +99,11 @@ int KnowledgeBase::getIndex(Clause &clause) {
 }
 
 void KnowledgeBase::clausalResolution(int index) {
-	for(int i = 0; i < clauses.size(); i++) {
+	for(unsigned i = 0; i < clauses.size(); i++) {
 		Clause result = clauses[index].resolution(clauses[i]);
 		std::cout << clauses[index] << " && " << clauses[i] << " => " << result << "\n";
 		bool isNotInClauses = true;
-		for(int j = 0; j < clauses.size(); j++) {
+		for(unsigned j = 0; j < clauses.size(); j++) {
 			if(result == clauses[j]) isNotInClauses = false;
 		}
 		if(isNotInClauses) {
