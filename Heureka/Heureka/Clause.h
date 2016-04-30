@@ -49,6 +49,9 @@ public:
     void addLiteralToClause(Literal& literal);
     void calcHeuristicDistance();
     std::string toString() const;
+    std::string convertLiteralsToString() const;
+    std::basic_string<char, std::char_traits<char>, std::allocator<char>> checkIfLiteralStringIsEmpty(
+            const std::string &out) const;
 
     // Comparison operators
     bool operator() (const Clause& lhs, const Clause& rhs) const;

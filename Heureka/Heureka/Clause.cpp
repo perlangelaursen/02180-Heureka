@@ -25,13 +25,22 @@ void Clause::calcHeuristicDistance() {
 }
 
 std::string Clause::toString() const {
+    std::string out = convertLiteralsToString();
+    out = checkIfLiteralStringIsEmpty(out);
+    if (symbols.size() > 1) out = "(" + out +")";
+    return out;
+}
+
+std::basic_string<char, std::char_traits<char>> Clause::checkIfLiteralStringIsEmpty(const std::string &out) const {
+    return (out.compare("") == 0) ? "Ø" : out.substr(0, out.length() - 4);
+}
+
+std::string Clause::convertLiteralsToString() const {
     std::string out("");
     for(auto iter = symbols.cbegin(); iter != symbols.cend(); ++iter) {
         out += iter -> toString();
         out += " || ";
     }
-    out = (out.compare("") == 0) ? "Ø" : out.substr(0, out.length() - 4);
-    if (symbols.size() > 1) out = "(" + out +")";
     return out;
 }
 
